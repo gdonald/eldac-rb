@@ -1,19 +1,22 @@
 language: ruby
 rvm:
-  - "2.3.1"
-  - "2.2.5"
+- 2.3.1
+- 2.2.5
 script:
-  - COVERAGE=true bundle exec rake
-  - CODECLIMATE_REPO_TOKEN=1a209f56ee0cdf880825ab5d6a414ccb866d1cdf55ff1530574b018382ccf263 bundle exec codeclimate-test-reporter
+- COVERAGE=true bundle exec rake
+- bundle exec codeclimate-test-reporter
 services:
-  - postgresql
+- postgresql
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
 before_script:
-  - "echo 'gem: --no-document --no-rdoc' > ~/.gemrc"
-  - "echo '--colour' > ~/.rspec"
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - cp config/database.yml-travis config/database.yml
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - RAILS_ENV=test bundle exec rake db:migrate
+- 'echo ''gem: --no-document --no-rdoc'' > ~/.gemrc'
+- echo '--colour' > ~/.rspec
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- cp config/database.yml-travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- RAILS_ENV=test bundle exec rake db:migrate
+env:
+  global:
+    secure: uJLK3R9SScHRALKrOJTqo7oS0Zgvbl6k1hSbxKbKfRtIAzaYzi1KSKOxawCu6AmmsTTWGqytvd/MoUKVvAoHzp08oJSK/59S7uCf4z9miIrgQ5dZN2F2tX+3e4U+HNFAwPe4PF3IT6/UCWHWLOdKvg6NZffT/dYH0X7euv8tLYaYws0BWOmdsEZUlI4TwgduIB0zZAJX5gybNdsDTLAdz0xGu5yB94GCQS/aeE1EAtnY0NBcmS1erVkVWU2FB/huou7jDSs/pxgFGTvsymgZ8Kn6+OAkcUTJY/spvMItb91cXi8bSDEgI+H8LMOSz69NBeP70TyqWC0hFpDJuKA9bDUQ5aftfnxwiofnE+mmcS7duEd4Q4SSXYZQcetR3+ZgPYTyS6ZTJiwkY5Ptk66zGzlkYl2K+UaF6rrvn7wu4XRQDDoGZg6j2uFmBPDoXpZ2pJumbOqZjli0iIQ8SZLwrHmUmaSltcLqq0/HZJBUMEClohbE4wBVaZt/z1j9SzlaikPkY9v/U1UVe1CkIljOIZmso3RbICeQq5r+p/49Lp+pJMacEyJu+dp7kb941McHErksEO0I9jaQGSTXm1nQk6/yjZC0Frba5ikehW69KSbbLXQYcprlFh44+0vb5MQxmjuxjB6wL9TPxRzlZ1KOwWAxlHneO93M5XYZSl+5AJ0=
