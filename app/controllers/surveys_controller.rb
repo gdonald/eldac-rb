@@ -38,7 +38,7 @@ class SurveysController < ApplicationController
   private
 
   def survey_params
-    params.require(:survey).permit(:name)
+    params.require(:survey).permit(:name, :active)
   end
 
   def get_survey

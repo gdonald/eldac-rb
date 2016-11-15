@@ -5,12 +5,14 @@
       %thead
         %tr
           %th Survey
+          %th Active
           %th Records
           %th{ colspan: 2 } &nbsp;
       %tbody
         - @project.surveys.each do |s|
           %tr.hand{ id: "s_#{s.id}" }
             %td.middle #{ " &nbsp;#{sg 'sort'} &nbsp;#{s.name}".html_safe }
+            %td.middle= s.active? ? '✓' : '✖︎'
             %td.middle= s.records.size
             %td.tight= link_to raw("#{sg 'pencil'} &nbsp;Edit"), edit_project_survey_path(@project, s), id: "survey_#{s.id}", type: :button, class: 'btn btn-sm btn-warning'
             %td.tight= link_to raw("#{sg 'remove'} &nbsp;Delete"), 'javascript:;', id: "ad_survey_#{s.id}", type: :button, class: 'btn btn-sm btn-danger'
