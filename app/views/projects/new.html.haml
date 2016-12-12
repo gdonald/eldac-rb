@@ -6,8 +6,8 @@
   .panel-heading
     .h3.panel-title Project Info
   .panel-body
-    = form_for @project do
-      = render 'projects/form'
+    = simple_form_for @project do |f|
+      = render partial: 'projects/form', locals: { f: f }
       .form-group
         %button.btn.btn-success{ type: :submit }
           = sg('share-alt')

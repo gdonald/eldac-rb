@@ -2,14 +2,14 @@ class FormsController < ApplicationController
 
   before_action :require_login
   before_action :get_project
-  before_action :get_form, only: [:edit, :update, :ask_delete, :destroy]
+  before_action :form, only: [:edit, :update, :ask_delete, :destroy]
 
   layout 'main'
 
   def create
     @form = Form.create(form_params.merge(project: @project))
-    if @form.valid?
-      redirect_to edit_project_path(@project)
+    if @form.persisted?
+      redirect_to edit_project_form_path(@project, @form)
       return
     end
     render 'projects/edit'
@@ -31,9 +31,6 @@ class FormsController < ApplicationController
     render 'forms/edit'
   end
 
-  def ask_delete
-  end
-
   def destroy
     @id = @form.id
     @form.destroy
@@ -50,7 +47,7 @@ class FormsController < ApplicationController
     params.require(:form).permit(:name)
   end
 
-  def get_form
+  def form
     @form = @project.forms.where(id: params[:id]).first
     redirect_to root_path unless @form
   end

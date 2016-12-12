@@ -5,20 +5,20 @@ class FoldersController < ApplicationController
   layout 'main'
 
   def update
-    @folder = @current_user.folders.where( id: params[:id] ).first
+    @folder = @current_user.folders.where(id: params[:id]).first
     @folder.update(folder_params) if @folder
   end
 
   def ask_delete
-    @folder = @current_user.folders.where( id: params[:id] ).first
+    @folder = @current_user.folders.where(id: params[:id]).first
   end
 
   def edit
-    @folder = @current_user.folders.where( id: params[:id] ).first
+    @folder = @current_user.folders.where(id: params[:id]).first
   end
 
   def toggle_collapse
-    @folder = @current_user.folders.where(:id => params[:id]).first
+    @folder = @current_user.folders.where(id: params[:id]).first
     @folder.collapsed = !@folder.collapsed
     @folder.save!
     head :ok
@@ -33,7 +33,7 @@ class FoldersController < ApplicationController
     session[:organize_folder_id] = params[:folder_id].to_i
     get_projects_list
     if @folder
-      render :partial => 'projects_list'
+      render partial: :projects_list
       return
     end
     head :ok
@@ -63,7 +63,7 @@ class FoldersController < ApplicationController
   private
 
   def folder_params
-    params.permit(:id, :name, :fg, :bg).merge(:user => @current_user)
+    params.permit(:id, :name, :fg, :bg).merge(user: @current_user)
   end
 
 end

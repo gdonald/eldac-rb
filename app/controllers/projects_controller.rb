@@ -21,12 +21,11 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.create(project_params)
     if @project.valid?
-      UserProject.create!(:user => @current_user, :project => @project, :relationship => Relationship.owner)
+      UserProject.create!(user: @current_user, project: @project, relationship: Relationship.owner)
       redirect_to edit_project_path(@project)
       return
     end
     render :new
-    return
   end
 
   def edit
@@ -56,16 +55,13 @@ class ProjectsController < ApplicationController
     end
     flash[:notice] = 'Project update failed'
     render :edit
-    return
   end
 
   def ask_delete
     @project = project_by_id params[:id]
-    unless @project && @current_user.is_owner?(@project)
-      flash[:notice] = 'Project not found'
-      redirect_to projects_path
-      return
-    end
+    return unless @project && @current_user.is_owner?(@project)
+    flash[:notice] = 'Project not found'
+    redirect_to projects_path
   end
 
   def destroy
@@ -80,7 +76,6 @@ class ProjectsController < ApplicationController
       flash[:notice] = 'Project not found'
     end
     redirect_to projects_path
-    return
   end
 
   def organize
@@ -92,20 +87,21 @@ class ProjectsController < ApplicationController
   def assigned_folder
     session[:organize_assigned] = params[:assigned].to_i
     get_projects_list
-    render :partial => 'folders/projects_list'
-    return
+    render partial: 'folders/projects_list'
   end
 
   def checkall_folder
     if params[:project_ids]
-      @folder = @current_user.folders.where(:id => params[:folder_id].to_i).first
+      @folder = @current_user.folders.where(id: params[:folder_id].to_i).first
       unless @folder.nil?
-        params[:project_ids].collect{ |id| id.to_i }.each do |id|
-          @project_folder = @current_user.project_folders.where(:folder => @folder, :project_id => id).first
+        params[:project_ids].collect(&:to_i).each do |id|
+          @project_folder = @current_user.project_folders.where(folder: @folder, project_id: id).first
           if params[:checkall].to_i == 1
-            ProjectFolder.create!(:user => @current_user,
-                                  :project_id => id,
-                                  :folder => @folder) unless @project_folder
+            unless @project_folder
+              ProjectFolder.create!(user: @current_user,
+                                    project_id: id,
+                                    folder: @folder)
+            end
           else
             @project_folder.destroy if @project_folder
           end
@@ -116,16 +112,16 @@ class ProjectsController < ApplicationController
   end
 
   def toggle_folder
-    @folder = @current_user.folders.where(:id => params[:folder_id].to_i).first
+    @folder = @current_user.folders.where(id: params[:folder_id].to_i).first
     unless @folder.nil?
-      params[:project_ids].collect{|id|id}.each do |id|
-        @project_folder = @current_user.project_folders.where(:folder => @folder, :project_id => id).first
+      params[:project_ids].collect { |id| id }.each do |id|
+        @project_folder = @current_user.project_folders.where(folder: @folder, project_id: id).first
         if @project_folder
           @project_folder.destroy
         else
-          ProjectFolder.create!(:user => @current_user,
-                                :project_id => id,
-                                :folder => @folder)
+          ProjectFolder.create!(user: @current_user,
+                                project_id: id,
+                                folder: @folder)
         end
       end
     end

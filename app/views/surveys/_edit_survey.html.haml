@@ -1,0 +1,10 @@
+.row.hidden#survey
+  %p &nbsp;
+  .panel.panel-default
+    .panel-body
+      = simple_form_for [@project, @survey], method: :put do |f|
+        = render partial: 'surveys/form', locals: { f: f }
+        .form-group
+          = f.button :button, class: 'btn-success' do
+            = sg 'pencil'
+            Update Survey

@@ -1,22 +1,22 @@
 
 source 'https://rubygems.org'
 
-gem 'rails'
-gem 'pg'
 gem 'activerecord-session_store'
 gem 'acts_as_list'
+gem 'bcrypt'
+gem 'bootstrap-sass'
+gem 'haml'
+gem 'jbuilder'
+gem 'jquery-rails'
+gem 'pg'
+gem 'rails'
 
+gem 'sass-rails'
 gem 'simple_form'
 gem 'sprockets-rails'
-gem 'bootstrap-sass'
-gem 'sass-rails'
 
 gem 'coffee-rails'
 gem 'uglifier'
-gem 'jquery-rails'
-gem 'jbuilder'
-gem 'bcrypt'
-gem 'haml'
 
 gem 'unicorn'
 
@@ -26,20 +26,20 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'faker'
+  gem 'byebug'
   gem 'capybara'
   gem 'capybara-webkit'
-  gem 'selenium-webdriver'
-  gem 'poltergeist'
   gem 'database_cleaner'
-  gem 'byebug'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'poltergeist'
   gem 'pry'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
 end
 
 group :test do
   gem 'codeclimate-test-reporter', require: nil
-  gem 'simplecov', require: false
   gem 'rails-controller-testing'
+  gem 'simplecov', require: false
 end

@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.where(:email => params.fetch(:email, '')).first
+    @user = User.where(email: params.fetch(:email, '')).first
     if @user
       if @user.email_valid
         if User.authenticate(@user.email, params.fetch(:password, ''))

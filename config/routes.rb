@@ -24,6 +24,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :surveys, only: [] do
+    post :assign_forms, on: :member
+  end
+
   resources :forms, only: [] do
     resources :pages do
       get :ask_delete, on: :member
@@ -48,7 +52,7 @@ Rails.application.routes.draw do
   resources :fields, only: [] do
     resources :field_opts do
       get :ask_delete, on: :member
-      post :save_sort, on: :collection      
+      post :save_sort, on: :collection
     end
   end
 
