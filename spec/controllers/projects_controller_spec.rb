@@ -189,7 +189,7 @@ RSpec.describe ProjectsController, type: :controller do
 
       it 'returns form on error' do
         expect {
-          post :create, params: { :project => { :name => '' } }, session: { user_id: user.id }
+          post :create, params: { project: { name: '' } }, session: { user_id: user.id }
         }.to change(Project, :count).by(0)
         expect(response).to have_http_status(:success)
         expect(response).to render_template(:new)

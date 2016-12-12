@@ -33,7 +33,7 @@ class FoldersController < ApplicationController
     session[:organize_folder_id] = params[:folder_id].to_i
     get_projects_list
     if @folder
-      render partial: :projects_list
+      render partial: 'projects_list'
       return
     end
     head :ok

@@ -59,9 +59,10 @@ class ProjectsController < ApplicationController
 
   def ask_delete
     @project = project_by_id params[:id]
-    return unless @project && @current_user.is_owner?(@project)
-    flash[:notice] = 'Project not found'
-    redirect_to projects_path
+    unless @project && @current_user.is_owner?(@project)
+      flash[:notice] = 'Project not found'
+      redirect_to projects_path
+    end
   end
 
   def destroy
