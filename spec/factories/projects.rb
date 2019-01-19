@@ -1,11 +1,11 @@
-FactoryGirl.define do
+# frozen_string_literal: true
 
+FactoryBot.define do
   factory :project do
-    name 'Project'
+    name { 'Project' }
 
     trait :valid_project do
       name { Faker::Lorem.word.titleize }
     end
   end
-
 end

@@ -1,8 +1,11 @@
-class SectionsController < ApplicationController
+# frozen_string_literal: true
 
+class SectionsController < ApplicationController
   before_action :require_login
   before_action :page
-  before_action only: [:ask_delete, :destroy, :edit, :update] { get_section( params[:id] ) }
+  before_action only: %i[ask_delete destroy edit update] do
+    get_section(params[:id])
+  end
 
   layout 'main'
 
@@ -56,5 +59,4 @@ class SectionsController < ApplicationController
     @page = nil unless @project
     redirect_to root_path unless @page
   end
-
 end

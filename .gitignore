@@ -14,3 +14,4 @@
 config/database.yml
 coverage
 vendor/bundle
+.idea

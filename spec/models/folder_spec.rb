@@ -1,14 +1,13 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
 RSpec.describe Folder, type: :model do
+  let!(:valid_folder) { create(:folder, :valid_folder) }
 
   it_behaves_like 'colorful'
 
-  let!(:valid_folder) { create(:folder, :valid_folder) }
-
   describe 'valid folder' do
-
     let!(:red_folder) { create(:folder, :valid_folder, fg: 'ffff00', bg: 'ff0000') }
 
     it 'has a valid factory' do
@@ -22,7 +21,5 @@ RSpec.describe Folder, type: :model do
     it 'has a td a style' do
       expect(red_folder.a_style).to eq('text-decoration: none; color: #ffff00')
     end
-
   end
-
 end

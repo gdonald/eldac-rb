@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Folder < ActiveRecord::Base
   include Colorful
 
@@ -19,5 +21,4 @@ class Folder < ActiveRecord::Base
   def a_style
     'text-decoration: none; color: #' << fg
   end
-
 end

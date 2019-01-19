@@ -1,38 +1,37 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SurveysController, type: :controller do
-
   describe 'POST #create' do
-
     let(:user) { create(:user, :valid_user) }
     let(:project) { create(:project) }
     let(:relationship) { create(:relationship, :owner) }
     let!(:user_project) { create(:user_project, user: user, project: project, relationship: relationship) }
 
     it 'anon redirects' do
-      expect {
+      expect do
         post :create, params: { project_id: project.id, survey: { name: 'Survey 1' } }, session: { user_id: nil }
-      }.to change(Survey, :count).by(0)
+      end.to change(Survey, :count).by(0)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'valid survey returns redirect' do
-      expect {
+      expect do
         post :create, params: { project_id: project.id, survey: { name: 'Survey 1' } }, session: { user_id: user.id }
-      }.to change(Survey, :count).by(1)
+      end.to change(Survey, :count).by(1)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'invalid survey returns errors' do
-      expect {
+      expect do
         post :create, params: { project_id: project.id, survey: { name: nil } }, session: { user_id: user.id }
-      }.to change(Survey, :count).by(0)
+      end.to change(Survey, :count).by(0)
       expect(response).to have_http_status(:success)
     end
   end
 
   describe 'GET #edit' do
-
     let(:user) { create(:user, :valid_user) }
     let(:project) { create(:project) }
     let(:relationship) { create(:relationship, :owner) }
@@ -61,7 +60,6 @@ RSpec.describe SurveysController, type: :controller do
   end
 
   describe 'POST #update' do
-
     let(:user) { create(:user, :valid_user) }
     let(:project) { create(:project) }
     let(:relationship) { create(:relationship, :owner) }

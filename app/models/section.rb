@@ -1,5 +1,6 @@
-class Section < ActiveRecord::Base
+# frozen_string_literal: true
 
+class Section < ActiveRecord::Base
   belongs_to :page
   acts_as_list scope: :page
 
@@ -7,5 +8,4 @@ class Section < ActiveRecord::Base
 
   validates :page_id, presence: true
   validates :name, presence: true, length: { maximum: 64 }, uniqueness: { scope: :page_id }
-
 end

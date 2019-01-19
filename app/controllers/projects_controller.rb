@@ -1,5 +1,6 @@
-class ProjectsController < ApplicationController
+# frozen_string_literal: true
 
+class ProjectsController < ApplicationController
   before_action :require_login
 
   layout 'main'
@@ -104,7 +105,7 @@ class ProjectsController < ApplicationController
                                     folder: @folder)
             end
           else
-            @project_folder.destroy if @project_folder
+            @project_folder&.destroy
           end
         end
       end
@@ -132,11 +133,10 @@ class ProjectsController < ApplicationController
   private
 
   def project_by_id(id)
-    @current_user.undeleted_projects.find{|p|p.id == id.to_i}
+    @current_user.undeleted_projects.find { |p| p.id == id.to_i }
   end
 
   def project_params
     params.require(:project).permit(:name)
   end
-
 end

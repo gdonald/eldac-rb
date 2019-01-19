@@ -1,5 +1,6 @@
-FactoryGirl.define do
+# frozen_string_literal: true
 
+FactoryBot.define do
   factory :project_folder do
     user { create(:user, :valid_user) }
     project { create(:project, :valid_project) }
@@ -8,5 +9,4 @@ FactoryGirl.define do
     trait :valid_project_folder do
     end
   end
-
 end

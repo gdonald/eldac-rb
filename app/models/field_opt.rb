@@ -1,5 +1,6 @@
-class FieldOpt < ActiveRecord::Base
+# frozen_string_literal: true
 
+class FieldOpt < ActiveRecord::Base
   belongs_to :field, counter_cache: true
   acts_as_list scope: :field
 
@@ -10,5 +11,4 @@ class FieldOpt < ActiveRecord::Base
   def to_s
     name
   end
-
 end

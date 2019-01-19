@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe FieldsController, type: :controller do
-
   describe 'POST #save_sort' do
-
     let(:user) { create(:user, :valid_user) }
     let(:project) { create(:project) }
     let(:relationship) { create(:relationship, :owner) }
@@ -31,9 +31,8 @@ RSpec.describe FieldsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-  
-  describe 'GET #ask_delete' do
 
+  describe 'GET #ask_delete' do
     let(:user) { create(:user, :valid_user) }
     let(:project) { create(:project) }
     let(:relationship) { create(:relationship, :owner) }
@@ -64,9 +63,8 @@ RSpec.describe FieldsController, type: :controller do
       expect(response).to render_template('fields/ask_delete')
     end
   end
-  
-  describe 'POST #destroy' do
 
+  describe 'POST #destroy' do
     let(:user) { create(:user, :valid_user) }
     let(:project) { create(:project) }
     let(:relationship) { create(:relationship, :owner) }
@@ -78,36 +76,35 @@ RSpec.describe FieldsController, type: :controller do
     let!(:field) { create(:field, section: section, field_type: field_type) }
 
     it 'returns redirect' do
-      expect {
+      expect do
         delete :destroy, params: { section_id: section.id, id: field.id, format: :js }, session: { user_id: user.id }
-      }.to change(Field, :count).by(-1)
+      end.to change(Field, :count).by(-1)
       expect(response).to render_template('fields/destroy')
     end
 
     it 'anon user returns redirect' do
-      expect {
+      expect do
         delete :destroy, params: { section_id: section.id, id: field.id, format: :js }, session: { user_id: nil }
-      }.to change(Field, :count).by(0)
+      end.to change(Field, :count).by(0)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'invalid field returns redirect' do
-      expect {
+      expect do
         delete :destroy, params: { section_id: section.id, id: 0, format: :js }, session: { user_id: user.id }
-      }.to change(Field, :count).by(0)
+      end.to change(Field, :count).by(0)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'invalid field returns redirect' do
-      expect {
+      expect do
         delete :destroy, params: { section_id: 0, id: field.id, format: :js }, session: { user_id: user.id }
-      }.to change(Field, :count).by(0)
+      end.to change(Field, :count).by(0)
       expect(response).to have_http_status(:redirect)
     end
   end
-  
-  describe 'POST #update' do
 
+  describe 'POST #update' do
     let(:user) { create(:user, :valid_user) }
     let(:project) { create(:project) }
     let(:relationship) { create(:relationship, :owner) }
@@ -138,9 +135,8 @@ RSpec.describe FieldsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-  
+
   describe 'GET #edit' do
-    
     let(:user) { create(:user, :valid_user) }
     let(:project) { create(:project) }
     let(:relationship) { create(:relationship, :owner) }
@@ -173,7 +169,6 @@ RSpec.describe FieldsController, type: :controller do
   end
 
   describe 'POST #create' do
-
     let(:user) { create(:user, :valid_user) }
     let(:project) { create(:project) }
     let(:relationship) { create(:relationship, :owner) }
@@ -182,34 +177,33 @@ RSpec.describe FieldsController, type: :controller do
     let(:page) { create(:page, form: form) }
     let(:section) { create(:section, page: page) }
     let(:field_type) { create(:field_type) }
-    
+
     it 'anon user returns redirect' do
-      expect {
+      expect do
         post :create, params: { section_id: section.id, field: { name: 'Field 1', field_type_id: field_type.id } }, session: { user_id: nil }
-      }.to change(Field, :count).by(0)
+      end.to change(Field, :count).by(0)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'valid field returns redirect' do
-      expect {
+      expect do
         post :create, params: { section_id: section.id, field: { name: 'Field 1', field_type_id: field_type.id } }, session: { user_id: user.id }
-      }.to change(Field, :count).by(1)
+      end.to change(Field, :count).by(1)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'invalid name returns errors' do
-      expect {
+      expect do
         post :create, params: { section_id: section.id, field: { name: nil, field_type_id: field_type.id } }, session: { user_id: user.id }
-      }.to change(Field, :count).by(0)
+      end.to change(Field, :count).by(0)
       expect(response).to have_http_status(:success)
     end
 
     it 'invalid field type returns errors' do
-      expect {
+      expect do
         post :create, params: { section_id: section.id, field: { name: 'Field 1', field_type_id: 0 } }, session: { user_id: user.id }
-      }.to change(Field, :count).by(0)
+      end.to change(Field, :count).by(0)
       expect(response).to have_http_status(:success)
     end
   end
-
 end

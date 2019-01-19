@@ -1,25 +1,27 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
 
-if ENV['SELENIUM'] == 'true'
-  Capybara.default_max_wait_time = 5
-  if ENV['BROWSER'] == 'chrome'
-    Capybara.register_driver :chrome do |app|
-      Capybara::Selenium::Driver.new(app, :browser => :chrome)
-    end
-    Capybara.javascript_driver = :chrome
-  else
-    Capybara.javascript_driver = :selenium
-  end
-else
-  require 'capybara/poltergeist'
-  Capybara.javascript_driver = :poltergeist
-end
+# if ENV['SELENIUM'] == 'true'
+#   Capybara.default_max_wait_time = 5
+#   if ENV['BROWSER'] == 'chrome'
+#     Capybara.register_driver :chrome do |app|
+#       Capybara::Selenium::Driver.new(app, :browser => :chrome)
+#     end
+#     Capybara.javascript_driver = :chrome
+#   else
+#     Capybara.javascript_driver = :selenium
+#   end
+# else
+#   #require 'capybara/poltergeist'
+#   #Capybara.javascript_driver = :poltergeist
+# end
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -44,9 +46,9 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  #config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -57,19 +59,19 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.before(:each) do
+  config.before do
     DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each, :js => true) do
+  config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
   end
 
-  config.before(:each) do
+  config.before do
     DatabaseCleaner.start
   end
 
-  config.after(:each) do
+  config.after do
     DatabaseCleaner.clean
   end
 
@@ -93,3 +95,25 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+require 'selenium/webdriver'
+
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.register_driver :headless_chrome do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOptions: { args: %w[headless disable-gpu] }
+  )
+
+  Capybara::Selenium::Driver.new app,
+                                 browser: :chrome,
+                                 desired_capabilities: capabilities
+end
+
+Capybara.javascript_driver = if ENV['CHROME'] == 'true'
+                               :chrome
+                             else
+                               :headless_chrome
+                             end

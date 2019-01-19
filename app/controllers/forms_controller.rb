@@ -1,8 +1,9 @@
-class FormsController < ApplicationController
+# frozen_string_literal: true
 
+class FormsController < ApplicationController
   before_action :require_login
   before_action :get_project
-  before_action :form, only: [:edit, :update, :ask_delete, :destroy]
+  before_action :form, only: %i[edit update ask_delete destroy]
 
   layout 'main'
 
@@ -51,5 +52,4 @@ class FormsController < ApplicationController
     @form = @project.forms.where(id: params[:id]).first
     redirect_to root_path unless @form
   end
-
 end

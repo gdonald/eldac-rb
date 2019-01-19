@@ -1,8 +1,9 @@
-class PagesController < ApplicationController
+# frozen_string_literal: true
 
+class PagesController < ApplicationController
   before_action :require_login
   before_action :form
-  before_action :page, only: [:ask_delete, :destroy, :edit, :update]
+  before_action :page, only: %i[ask_delete destroy edit update]
 
   layout 'main'
 
@@ -61,5 +62,4 @@ class PagesController < ApplicationController
     @page = nil unless @project
     redirect_to root_path unless @page
   end
-
 end

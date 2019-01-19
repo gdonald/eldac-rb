@@ -1,5 +1,6 @@
-class FieldType < ActiveRecord::Base
+# frozen_string_literal: true
 
+class FieldType < ActiveRecord::Base
   has_many :fields, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 32 }, uniqueness: true
@@ -9,5 +10,4 @@ class FieldType < ActiveRecord::Base
   def to_s
     name
   end
-  
 end

@@ -1,5 +1,6 @@
-class CreateFolders < ActiveRecord::Migration
+# frozen_string_literal: true
 
+class CreateFolders < ActiveRecord::Migration
   def change
     create_table :folders do |t|
       t.references :user, index: true, foreign_key: true
@@ -10,5 +11,4 @@ class CreateFolders < ActiveRecord::Migration
       t.integer :position, index: true, null: false, default: 0
     end
   end
-
 end

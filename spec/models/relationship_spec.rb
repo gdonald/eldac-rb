@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Relationship, type: :model do
-
-  let(:valid_relationship){ create(:relationship, :valid_relationship) }
-  let!(:owner){ create(:relationship, :owner) }
+  let(:valid_relationship) { create(:relationship, :valid_relationship) }
+  let!(:owner) { create(:relationship, :owner) }
 
   describe 'valid relationship' do
     it 'has a valid factory' do
@@ -14,5 +15,4 @@ RSpec.describe Relationship, type: :model do
       expect(Relationship.owner.name).to eq('owner')
     end
   end
-
 end

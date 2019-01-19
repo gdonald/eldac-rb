@@ -1,8 +1,9 @@
-class FieldsController < ApplicationController
+# frozen_string_literal: true
 
+class FieldsController < ApplicationController
   before_action :require_login
   before_action { get_section(params[:section_id]) }
-  before_action :field, only: [:ask_delete, :destroy, :edit, :update]
+  before_action :field, only: %i[ask_delete destroy edit update]
 
   layout 'main'
 
@@ -52,5 +53,4 @@ class FieldsController < ApplicationController
     @field = nil unless @project
     redirect_to root_path unless @field
   end
-
 end

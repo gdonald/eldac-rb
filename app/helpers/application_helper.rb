@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
-module ApplicationHelper
+# frozen_string_literal: true
 
+module ApplicationHelper
   def logged_in?
     !session[:user_id].nil?
   end
@@ -19,10 +19,9 @@ module ApplicationHelper
 
   def glyph(sym)
     icons = {
-      :records  => 'th-list',
-      :projects => 'list-alt',
+      records: 'th-list',
+      projects: 'list-alt'
     }
     icons[sym.to_sym]
   end
-
 end

@@ -1,5 +1,6 @@
-class SessionsController < ApplicationController
+# frozen_string_literal: true
 
+class SessionsController < ApplicationController
   def new
     session[:user_id] = nil
   end
@@ -28,5 +29,4 @@ class SessionsController < ApplicationController
     reset_session
     redirect_to root_path
   end
-
 end

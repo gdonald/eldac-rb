@@ -1,5 +1,6 @@
-class Record < ActiveRecord::Base
+# frozen_string_literal: true
 
+class Record < ActiveRecord::Base
   belongs_to :user
   belongs_to :form, counter_cache: true
   belongs_to :survey, counter_cache: true
@@ -8,5 +9,4 @@ class Record < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :form_id, presence: true
-
 end

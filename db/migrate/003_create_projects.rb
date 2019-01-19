@@ -1,5 +1,6 @@
-class CreateProjects < ActiveRecord::Migration
+# frozen_string_literal: true
 
+class CreateProjects < ActiveRecord::Migration
   def change
     create_table :projects do |t|
       t.string :name, index: true, limit: 64, null: false
@@ -8,5 +9,4 @@ class CreateProjects < ActiveRecord::Migration
       t.boolean :deleted, index: true, default: false
     end
   end
-
 end

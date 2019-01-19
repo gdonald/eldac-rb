@@ -1,19 +1,20 @@
+# frozen_string_literal: true
 
 include FactoryGirl::Syntax::Methods
 
-fs = %w(text textarea radio select image checkbox date datetime calculated)
+fs = %w[text textarea radio select image checkbox date datetime calculated]
 fs.sort.each do |n|
   create(:field_type, name: n)
 end
 puts "#{FieldType.count} field types created"
 text = FieldType.where(name: 'text').first
 
-%w(validate_email).sort.each do |n|
+%w[validate_email].sort.each do |n|
   create(:token_type, name: n)
 end
 puts "#{TokenType.count} token types created"
 
-%w(owner).sort.each do |n|
+%w[owner].sort.each do |n|
   create(:relationship, name: n)
 end
 puts "#{Relationship.count} relationships created"
@@ -24,8 +25,7 @@ user = create(:user,
               email: 'gdonald@gmail.com',
               password: 'changeme',
               password_confirmation: 'changeme',
-              email_valid: true
-)
+              email_valid: true)
 puts "#{User.count} users created"
 
 project = create(:project, name: Faker::Name.title)

@@ -1,5 +1,6 @@
-class Form < ActiveRecord::Base
+# frozen_string_literal: true
 
+class Form < ActiveRecord::Base
   belongs_to :project, counter_cache: true
   acts_as_list scope: :project
 
@@ -11,5 +12,4 @@ class Form < ActiveRecord::Base
 
   validates :project_id, presence: true
   validates :name, presence: true, length: { maximum: 64 }, uniqueness: { scope: :project_id }
-
 end

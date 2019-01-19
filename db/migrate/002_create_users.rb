@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 
 class CreateUsers < ActiveRecord::Migration
-
   def change
     create_table :users do |t|
       t.string :email, null: false, limit: 64
@@ -16,5 +16,4 @@ class CreateUsers < ActiveRecord::Migration
     end
     add_index :users, :email, unique: true
   end
-
 end

@@ -1,5 +1,6 @@
-class Page < ActiveRecord::Base
+# frozen_string_literal: true
 
+class Page < ActiveRecord::Base
   belongs_to :form
   acts_as_list scope: :form
 
@@ -7,5 +8,4 @@ class Page < ActiveRecord::Base
 
   validates :form_id, presence: true
   validates :name, presence: true, length: { maximum: 64 }, uniqueness: { scope: :form_id }
-
 end

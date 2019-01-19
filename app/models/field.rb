@@ -1,5 +1,6 @@
-class Field < ActiveRecord::Base
+# frozen_string_literal: true
 
+class Field < ActiveRecord::Base
   belongs_to :field_type, counter_cache: true
   belongs_to :section, counter_cache: true
   acts_as_list scope: :section
@@ -15,7 +16,6 @@ class Field < ActiveRecord::Base
   private
 
   def validate_field_type
-    errors.add(:field_type_id, 'is invalid') unless FieldType.exists?(self.field_type_id)
+    errors.add(:field_type_id, 'is invalid') unless FieldType.exists?(field_type_id)
   end
-  
 end

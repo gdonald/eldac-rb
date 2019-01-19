@@ -1,8 +1,9 @@
-class SurveysController < ApplicationController
+# frozen_string_literal: true
 
+class SurveysController < ApplicationController
   before_action :require_login
   before_action :get_project, except: [:assign_forms]
-  before_action :survey, only: [:edit, :update, :ask_delete, :destroy]
+  before_action :survey, only: %i[edit update ask_delete destroy]
 
   layout 'main'
 
@@ -32,14 +33,17 @@ class SurveysController < ApplicationController
   def assign_forms
     survey = Survey.find_by(id: forms_params[:survey_id])
     return unless survey
+
     project = @current_user.projects.where(id: survey.project_id).first
     return unless project
 
     form_params[:forms].each do |id|
       form = survey.forms.find_by(id: id)
       next unless form
+
       sf = SurveyForm.find_by(survey: survey, form: form)
       next if sf
+
       SurveyForm.create(survey: survey, form: form)
     end
 
@@ -62,5 +66,4 @@ class SurveysController < ApplicationController
     @survey = @project.surveys.where(id: params[:id]).first
     redirect_to root_path unless @survey
   end
-
 end

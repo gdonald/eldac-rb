@@ -1,12 +1,13 @@
-class FoldersController < ApplicationController
+# frozen_string_literal: true
 
+class FoldersController < ApplicationController
   before_action :require_login
 
   layout 'main'
 
   def update
     @folder = @current_user.folders.where(id: params[:id]).first
-    @folder.update(folder_params) if @folder
+    @folder&.update(folder_params)
   end
 
   def ask_delete
@@ -65,5 +66,4 @@ class FoldersController < ApplicationController
   def folder_params
     params.permit(:id, :name, :fg, :bg).merge(user: @current_user)
   end
-
 end

@@ -1,5 +1,6 @@
-class CreateFields < ActiveRecord::Migration
+# frozen_string_literal: true
 
+class CreateFields < ActiveRecord::Migration
   def change
     create_table :fields do |t|
       t.references :section, index: true, foreign_key: true
@@ -9,7 +10,6 @@ class CreateFields < ActiveRecord::Migration
       t.integer :field_opts_count, null: false, default: 0
       t.integer :position, index: true, null: false, default: 0
     end
-    add_index :fields, [:section_id, :name], unique: true
+    add_index :fields, %i[section_id name], unique: true
   end
-
 end
