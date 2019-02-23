@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateProjectFolders < ActiveRecord::Migration
+class CreateProjectFolders < ActiveRecord::Migration[5.2]
   def change
     create_table :project_folders do |t|
       t.references :user, index: true, foreign_key: true

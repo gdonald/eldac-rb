@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateFieldTypes < ActiveRecord::Migration
+class CreateFieldTypes < ActiveRecord::Migration[5.2]
   def change
     create_table :field_types do |t|
       t.string :name, null: false, limit: 32
