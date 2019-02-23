@@ -8,6 +8,8 @@ Eldac is an ELectronic DAta Capture tool.
 1. Copy database settings example:
 
 		$ cp config/database.yml-example config/database.yml
+		
+		bundle exec rake db:setup
 
 2. Install gems:
 
@@ -23,11 +25,11 @@ Eldac is an ELectronic DAta Capture tool.
 
 5. Run tests:
 
-		BROWSER=chrome SELENIUM=true bundle exec rake
+		bundle exec rake
 
 ## Status
 
-[![Build Status](https://travis-ci.org/gdonald/eldac.svg?branch=master)](https://travis-ci.org/gdonald/eldac) [![Test Coverage](https://codeclimate.com/github/gdonald/eldac/badges/coverage.svg)](https://codeclimate.com/github/gdonald/eldac/coverage) [![Code Climate](https://codeclimate.com/github/gdonald/eldac/badges/gpa.svg)](https://codeclimate.com/github/gdonald/eldac)
+[![Build Status](https://travis-ci.org/gdonald/eldac.svg?branch=master)](https://travis-ci.org/gdonald/eldac)
 
 ## License
 
