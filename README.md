@@ -35,4 +35,4 @@ Eldac is an ELectronic DAta Capture tool.
 
 ## License
 
-Eldac is released unde the [MIT License](http://www.opensource.org/licenses/MIT)
+Eldac is released under the [MIT License](http://www.opensource.org/licenses/MIT)
