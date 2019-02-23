@@ -8,24 +8,26 @@ Eldac is an ELectronic DAta Capture tool.
 1. Copy database settings example:
 
 		$ cp config/database.yml-example config/database.yml
-		
-		bundle exec rake db:setup
 
 2. Install gems:
 
 		$ bundle install
 
-3. Run:
+3. Migrate database:
+
+		bundle exec rake db:setup
+
+4. Run tests:
+
+		bundle exec rake
+
+5. Run:
 
 		$ bundle exec rails s
 
-4. Using a browser, go to `http://localhost:3000`.
+6. Open [http://localhost:3000](http://localhost:3000).
 
 		w0oh0o! :)
-
-5. Run tests:
-
-		bundle exec rake
 
 ## Status
 
