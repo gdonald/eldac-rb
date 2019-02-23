@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-include FactoryGirl::Syntax::Methods
+include FactoryBot::Syntax::Methods
 
 fs = %w[text textarea radio select image checkbox date datetime calculated]
 fs.sort.each do |n|
@@ -28,7 +28,7 @@ user = create(:user,
               email_valid: true)
 puts "#{User.count} users created"
 
-project = create(:project, name: Faker::Name.title)
+project = create(:project, name: Faker::Job.title)
 create(:user_project,
        user: user,
        project: project,

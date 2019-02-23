@@ -8,21 +8,6 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 
-# if ENV['SELENIUM'] == 'true'
-#   Capybara.default_max_wait_time = 5
-#   if ENV['BROWSER'] == 'chrome'
-#     Capybara.register_driver :chrome do |app|
-#       Capybara::Selenium::Driver.new(app, :browser => :chrome)
-#     end
-#     Capybara.javascript_driver = :chrome
-#   else
-#     Capybara.javascript_driver = :selenium
-#   end
-# else
-#   #require 'capybara/poltergeist'
-#   #Capybara.javascript_driver = :poltergeist
-# end
-
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -39,6 +24,8 @@ require 'rspec/rails'
 # require only the support files necessary.
 #
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+Dir[Rails.root.join('spec/shared/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

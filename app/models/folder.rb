@@ -15,10 +15,11 @@ class Folder < ActiveRecord::Base
   validates :bg, presence: true, length: { is: 6 }
 
   def td_style
-    'color: #' << fg << ';' << Folder.bg_css(bg, Folder.diff(bg, 0.9))
+    bg_css = Folder.bg_css(bg, Folder.diff(bg, 0.9))
+    "color: ##{fg};#{bg_css}"
   end
 
   def a_style
-    'text-decoration: none; color: #' << fg
+    "text-decoration: none; color: ##{fg}"
   end
 end
