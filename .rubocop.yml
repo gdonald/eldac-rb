@@ -3,3 +3,5 @@ AllCops:
   - 'db/schema.rb'
 Documentation:
   Enabled: false
+
+require: rubocop-performance
