@@ -24,6 +24,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'rspec-rails'
+  gem 'rubocop-performance'
   gem 'rubocop-rspec'
   gem 'wirble'
 end
@@ -38,9 +39,9 @@ end
 
 group :test do
   gem 'capybara-selenium'
-  gem 'chromedriver-helper'
   gem 'codeclimate-test-reporter', require: nil
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'simplecov', require: false
+  gem 'webdrivers'
 end
