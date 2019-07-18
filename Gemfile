@@ -42,6 +42,7 @@ group :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'database_cleaner'
   gem 'rails-controller-testing'
+  gem 'rspec_junit_formatter'
   gem 'simplecov', require: false
   gem 'webdrivers'
 end

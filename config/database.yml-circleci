@@ -1,0 +1,10 @@
+
+development:
+  adapter: postgresql
+  username: postgres
+  database: circle_ci_dev
+
+test:
+  adapter: postgresql
+  username: postgres
+  database: circle_ci_test
