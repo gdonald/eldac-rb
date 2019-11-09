@@ -23,7 +23,18 @@ group :development, :test do
   gem 'byebug'
   gem 'faker'
   gem 'pry'
-  gem 'rspec-rails'
+
+
+  # gem 'rspec-rails'
+
+  # TODO: remove this later
+  gem 'rspec-core', git: 'https://github.com/rspec/rspec-core'
+  gem 'rspec-expectations', git: 'https://github.com/rspec/rspec-expectations'
+  gem 'rspec-mocks', git: 'https://github.com/rspec/rspec-mocks'
+  gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails'
+  gem 'rspec-support', git: 'https://github.com/rspec/rspec-support'
+
+
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
   gem 'wirble'
