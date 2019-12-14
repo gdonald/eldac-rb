@@ -55,6 +55,8 @@ class ProjectsController < ApplicationController
       return
     end
     flash[:notice] = 'Project update failed'
+    @form = Form.new
+    @survey = Survey.new
     render :edit
   end
 

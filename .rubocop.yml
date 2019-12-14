@@ -1,7 +1,33 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
 AllCops:
   Exclude:
   - 'db/schema.rb'
-Documentation:
+Style/Documentation:
   Enabled: false
-
-require: rubocop-performance
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+Metrics/AbcSize:
+  Exclude:
+    - 'lib/**/*.rb'
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'lib/**/*.rb'
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/**/*.rb'
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'lib/**/*.rb'
+Metrics/LineLength:
+  Max: 120
+Metrics/ClassLength:
+  Max: 250
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/NotToNot:
+  Exclude:
+    - 'spec/**/*.rb'

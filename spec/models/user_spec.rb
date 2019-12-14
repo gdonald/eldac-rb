@@ -48,15 +48,15 @@ RSpec.describe User, type: :model do
     end
 
     it 'can authenticate' do
-      user = User.authenticate(valid_user.email, '')
+      user = described_class.authenticate(valid_user.email, '')
       expect(user).to eq(nil)
-      user = User.authenticate(valid_user.email, nil)
+      user = described_class.authenticate(valid_user.email, nil)
       expect(user).to eq(nil)
-      user = User.authenticate('', nil)
+      user = described_class.authenticate('', nil)
       expect(user).to eq(nil)
-      user = User.authenticate(nil, nil)
+      user = described_class.authenticate(nil, nil)
       expect(user).to eq(nil)
-      user = User.authenticate(valid_user.email, 'changeme')
+      user = described_class.authenticate(valid_user.email, 'changeme')
       expect(user).to eq(valid_user)
     end
 

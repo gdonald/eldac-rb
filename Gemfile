@@ -24,16 +24,13 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
 
+  # TODO: remove this:
+  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+    gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master'
+  end
 
+  # TODO: add this back:
   # gem 'rspec-rails'
-
-  # TODO: remove this later
-  gem 'rspec-core', git: 'https://github.com/rspec/rspec-core'
-  gem 'rspec-expectations', git: 'https://github.com/rspec/rspec-expectations'
-  gem 'rspec-mocks', git: 'https://github.com/rspec/rspec-mocks'
-  gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails'
-  gem 'rspec-support', git: 'https://github.com/rspec/rspec-support'
-
 
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
