@@ -85,9 +85,9 @@ describe 'users controller', type: :feature do
       # fill_in('Password', with: 'changeme')
       # fill_in('Password Confirmation', with: 'wrong')
       click_on('submit')
-      expect(page).to have_content "can't be blank"
-      expect(page).to have_content 'Close'
     end.to change(User, :count).by(0)
+    expect(page).to have_content "can't be blank"
+    expect(page).to have_content 'Close'
   end
 
   it 'missing password confirmation fails', js: true do
