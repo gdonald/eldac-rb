@@ -21,8 +21,8 @@ describe 'using the sessions controller', type: :feature do
         expect(page).to have_content 'Login'
         fill_in('Email', with: Faker::Internet.email)
         click_on('submit')
-        expect(page).to have_content 'Login failed'
       end.to change(ActiveRecord::SessionStore::Session, :count)
+      expect(page).to have_content 'Login failed'
     end
 
     it 'login to a user account', js: true do

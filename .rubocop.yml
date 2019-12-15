@@ -28,6 +28,8 @@ Metrics/ClassLength:
   Max: 250
 RSpec/MultipleExpectations:
   Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
 RSpec/NotToNot:
   Exclude:
     - 'spec/**/*.rb'
