@@ -13,8 +13,8 @@ RSpec.describe ProjectFolder, type: :model do
     it 'is checked' do
       p = project_folder.project
       f = project_folder.folder
-      expect(ProjectFolder.should_be_checked([project_folder], f.id, p)).to be true
-      expect(!ProjectFolder.should_be_checked([project_folder], 0, p)).to be true
+      expect(described_class.should_be_checked([project_folder], f.id, p)).to be true
+      expect(!described_class.should_be_checked([project_folder], 0, p)).to be true
     end
   end
 end

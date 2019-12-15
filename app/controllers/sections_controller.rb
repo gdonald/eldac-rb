@@ -15,6 +15,8 @@ class SectionsController < ApplicationController
       redirect_to edit_page_section_path(@page, @section)
       return
     end
+    @form = @page.form
+    @sections = @page.sections
     render 'pages/edit'
   end
 

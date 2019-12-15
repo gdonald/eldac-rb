@@ -13,6 +13,7 @@ class SurveysController < ApplicationController
       redirect_to edit_project_survey_path(@project, @survey)
       return
     end
+    @form = Form.new
     render 'projects/edit'
   end
 

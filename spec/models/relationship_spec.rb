@@ -12,7 +12,7 @@ RSpec.describe Relationship, type: :model do
     end
 
     it 'can be an owner' do
-      expect(Relationship.owner.name).to eq('owner')
+      expect(described_class.owner.name).to eq('owner')
     end
   end
 end
