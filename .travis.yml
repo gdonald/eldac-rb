@@ -1,13 +1,13 @@
 language: ruby
 rvm:
-  - 2.6.5
+  - 2.7.1
 script:
   - COVERAGE=true bundle exec rake
 services:
   - postgresql
   - xvfb
 addons:
-  postgresql: '9.6'
+  postgresql: '12'
   chrome: stable
 before_install:
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
