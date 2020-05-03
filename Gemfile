@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ruby '2.7.1'
+ruby '2.6.6'
 
 source 'https://rubygems.org'
 
@@ -27,12 +27,12 @@ group :development, :test do
   gem 'pry'
 
   # TODO: remove this:
-  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
-    gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master'
-  end
+  # %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+  #   gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master'
+  # end
 
   # TODO: add this back:
-  # gem 'rspec-rails'
+  gem 'rspec-rails'
 
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
