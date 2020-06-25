@@ -4,6 +4,7 @@ ruby '2.6.6'
 
 source 'https://rubygems.org'
 
+gem 'actionpack', '>= 6.0.3.2'
 gem 'activerecord-session_store'
 gem 'acts_as_list'
 gem 'bcrypt'
