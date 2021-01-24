@@ -40,8 +40,6 @@ jobs:
         RAILS_ENV: test
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
-    - name: Setup chromedriver
-      uses: nanasess/setup-chromedriver@v1.0.1
     - name: Run specs
       uses: GabrielBB/xvfb-action@v1      
       with:
