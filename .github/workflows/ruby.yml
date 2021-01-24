@@ -34,6 +34,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install dependent libraries
       run: sudo apt-get install libpq-dev
+    - name: Set up ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
     - name: Setup database
       run: |
         cp config/database.yml.github-actions config/database.yml
@@ -43,11 +48,6 @@ jobs:
         RAILS_ENV: test
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
-    - name: Set up ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true
     - name: Run tests
       run: bundle exec rake
       env:
