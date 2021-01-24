@@ -26,8 +26,6 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install libpq-dev google-chrome-stable
-        google-chrome --version
-        which google-chrome
     - name: Set up ruby
       uses: ruby/setup-ruby@v1
       with:
