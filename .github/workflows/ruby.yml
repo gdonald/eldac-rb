@@ -25,7 +25,7 @@ jobs:
     - name: Install dependent libraries
       run: |
         sudo apt-get update
-        sudo apt-get install libpq-dev google-chrome-stable
+        sudo apt-get install google-chrome-stable
     - name: Set up ruby
       uses: ruby/setup-ruby@v1
       with:
