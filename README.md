@@ -7,11 +7,11 @@ Eldac is an ELectronic DAta Capture tool.
 
 1. Copy database settings example:
 
-		$ cp config/database.yml-example config/database.yml
+		cp config/database.yml-example config/database.yml
 
 2. Install gems:
 
-		$ bundle install
+		bundle install
 
 3. Migrate database:
 
