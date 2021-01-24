@@ -31,7 +31,7 @@ Eldac is an ELectronic DAta Capture tool.
 
 ## Status
 
-![Ruby](https://github.com/gdonald/eldac/workflows/Ruby/badge.svg)
+[![Ruby](https://github.com/gdonald/eldac/workflows/Ruby/badge.svg)](https://github.com/gdonald/eldac/actions)
 
 ## License
 
