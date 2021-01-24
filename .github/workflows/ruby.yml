@@ -19,7 +19,6 @@ jobs:
     strategy:
       matrix:
         ruby-version: ['2.7']
-
     steps:
     - uses: actions/checkout@v2
     - name: Install dependent libraries
@@ -34,8 +33,7 @@ jobs:
     - name: Setup database
       run: |
         cp config/database.yml.github-actions config/database.yml
-        bundle exec rake db:create
-        bundle exec rake db:schema:load
+        bundle exec rake db:create db:schema:load
       env:
         RAILS_ENV: test
         POSTGRES_USER: postgres
