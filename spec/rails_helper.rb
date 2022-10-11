@@ -9,8 +9,8 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'webdrivers'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-Dir[Rails.root.join('spec/shared/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec/shared/**/*.rb')].sort.each { |f| require f }
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

@@ -113,7 +113,8 @@ RSpec.describe SectionsController, type: :controller do
     end
 
     it 'valid section returns redirect' do
-      post :update, params: { page_id: page.id, id: section.id, section: { name: 'New' } }, session: { user_id: user.id }
+      post :update, params: { page_id: page.id, id: section.id, section: { name: 'New' } },
+                    session: { user_id: user.id }
       expect(response).to have_http_status(:redirect)
     end
 

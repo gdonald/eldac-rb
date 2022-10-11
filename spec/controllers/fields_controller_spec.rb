@@ -121,17 +121,20 @@ RSpec.describe FieldsController, type: :controller do
     end
 
     it 'valid field returns redirect' do
-      post :update, params: { section_id: section.id, id: field.id, field: { name: 'New' } }, session: { user_id: user.id }
+      post :update, params: { section_id: section.id, id: field.id, field: { name: 'New' } },
+                    session: { user_id: user.id }
       expect(response).to have_http_status(:redirect)
     end
 
     it 'invalid name returns errors' do
-      post :update, params: { section_id: section.id, id: field.id, field: { name: nil, field_type_id: field_type.id } }, session: { user_id: user.id }
+      post :update,
+           params: { section_id: section.id, id: field.id, field: { name: nil, field_type_id: field_type.id } }, session: { user_id: user.id }
       expect(response).to have_http_status(:success)
     end
 
     it 'invalid field type returns errors' do
-      post :update, params: { section_id: section.id, id: field.id, field: { name: 'New', field_type_id: 0 } }, session: { user_id: user.id }
+      post :update, params: { section_id: section.id, id: field.id, field: { name: 'New', field_type_id: 0 } },
+                    session: { user_id: user.id }
       expect(response).to have_http_status(:success)
     end
   end
@@ -180,28 +183,32 @@ RSpec.describe FieldsController, type: :controller do
 
     it 'anon user returns redirect' do
       expect do
-        post :create, params: { section_id: section.id, field: { name: 'Field 1', field_type_id: field_type.id } }, session: { user_id: nil }
+        post :create, params: { section_id: section.id, field: { name: 'Field 1', field_type_id: field_type.id } },
+                      session: { user_id: nil }
       end.to change(Field, :count).by(0)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'valid field returns redirect' do
       expect do
-        post :create, params: { section_id: section.id, field: { name: 'Field 1', field_type_id: field_type.id } }, session: { user_id: user.id }
+        post :create, params: { section_id: section.id, field: { name: 'Field 1', field_type_id: field_type.id } },
+                      session: { user_id: user.id }
       end.to change(Field, :count).by(1)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'invalid name returns errors' do
       expect do
-        post :create, params: { section_id: section.id, field: { name: nil, field_type_id: field_type.id } }, session: { user_id: user.id }
+        post :create, params: { section_id: section.id, field: { name: nil, field_type_id: field_type.id } },
+                      session: { user_id: user.id }
       end.to change(Field, :count).by(0)
       expect(response).to have_http_status(:success)
     end
 
     it 'invalid field type returns errors' do
       expect do
-        post :create, params: { section_id: section.id, field: { name: 'Field 1', field_type_id: 0 } }, session: { user_id: user.id }
+        post :create, params: { section_id: section.id, field: { name: 'Field 1', field_type_id: 0 } },
+                      session: { user_id: user.id }
       end.to change(Field, :count).by(0)
       expect(response).to have_http_status(:success)
     end

@@ -97,7 +97,8 @@ RSpec.describe FormsController, type: :controller do
     end
 
     it 'valid form returns redirect' do
-      post :update, params: { project_id: project.id, id: form.id, form: { name: 'New' } }, session: { user_id: user.id }
+      post :update, params: { project_id: project.id, id: form.id, form: { name: 'New' } },
+                    session: { user_id: user.id }
       expect(response).to have_http_status(:redirect)
     end
 

@@ -19,12 +19,14 @@ RSpec.describe ProjectsController, type: :controller do
 
       it 'valid toggle renders nothing' do
         expect do
-          post :toggle_folder, params: { folder_id: folder.id, project_ids: [project.id] }, session: { user_id: user.id }
+          post :toggle_folder, params: { folder_id: folder.id, project_ids: [project.id] },
+                               session: { user_id: user.id }
         end.to change(ProjectFolder, :count).by(1)
         expect(response).to render_template(nil)
 
         expect do
-          post :toggle_folder, params: { folder_id: folder.id, project_ids: [project.id] }, session: { user_id: user.id }
+          post :toggle_folder, params: { folder_id: folder.id, project_ids: [project.id] },
+                               session: { user_id: user.id }
         end.to change(ProjectFolder, :count).by(-1)
         expect(response).to render_template(nil)
       end
@@ -42,12 +44,14 @@ RSpec.describe ProjectsController, type: :controller do
 
       it 'valid check all renders nothing' do
         expect do
-          post :checkall_folder, params: { checkall: 1, folder_id: folder.id, project_ids: [project.id] }, session: { user_id: user.id }
+          post :checkall_folder, params: { checkall: 1, folder_id: folder.id, project_ids: [project.id] },
+                                 session: { user_id: user.id }
         end.to change(ProjectFolder, :count).by(1)
         expect(response).to render_template(nil)
 
         expect do
-          post :checkall_folder, params: { checkall: 0, folder_id: folder.id, project_ids: [project.id] }, session: { user_id: user.id }
+          post :checkall_folder, params: { checkall: 0, folder_id: folder.id, project_ids: [project.id] },
+                                 session: { user_id: user.id }
         end.to change(ProjectFolder, :count).by(-1)
         expect(response).to render_template(nil)
       end

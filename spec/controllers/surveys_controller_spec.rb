@@ -67,17 +67,20 @@ RSpec.describe SurveysController, type: :controller do
     let(:survey) { create(:survey, project: project) }
 
     it 'anon user returns redirect' do
-      post :update, params: { project_id: project.id, id: survey.id, survey: { name: 'New' } }, session: { user_id: nil }
+      post :update, params: { project_id: project.id, id: survey.id, survey: { name: 'New' } },
+                    session: { user_id: nil }
       expect(response).to have_http_status(:redirect)
     end
 
     it 'valid survey returns redirect' do
-      post :update, params: { project_id: project.id, id: survey.id, survey: { name: 'New' } }, session: { user_id: user.id }
+      post :update, params: { project_id: project.id, id: survey.id, survey: { name: 'New' } },
+                    session: { user_id: user.id }
       expect(response).to have_http_status(:redirect)
     end
 
     it 'invalid survey returns errors' do
-      post :update, params: { project_id: project.id, id: survey.id, survey: { name: nil } }, session: { user_id: user.id }
+      post :update, params: { project_id: project.id, id: survey.id, survey: { name: nil } },
+                    session: { user_id: user.id }
       expect(response).to have_http_status(:success)
     end
   end

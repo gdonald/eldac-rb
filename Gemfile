@@ -26,13 +26,6 @@ group :development, :test do
   gem 'byebug'
   gem 'faker'
   gem 'pry'
-
-  # TODO: remove this:
-  # %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
-  #   gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master'
-  # end
-
-  # TODO: add this back:
   gem 'rspec-rails'
 
   gem 'rubocop-performance'
