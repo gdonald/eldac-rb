@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+class FieldOpt < ApplicationRecord
+  belongs_to :field, counter_cache: true
+  acts_as_list scope: :field
+
+  validates :field_id, presence: true
+
+  validates :name, presence: true, length: { maximum: 64 }, uniqueness: { scope: :field_id }
+
+  def to_s
+    name
+  end
+end
