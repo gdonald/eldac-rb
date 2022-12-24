@@ -1,0 +1,33 @@
+
+%div
+  .panel.panel-default
+    .panel-body
+      = form_for @folder, html: { class: 'form-inline' } do
+        - if @folder.errors[:name].empty?
+          .form-group
+            %input.form-control#name{ name: :name, placeholder: 'Name', type: :text, value: @folder.name }
+            %button.btn.btn-success{ type: :submit }
+              #{sg 'share-alt'} Create New Folder
+          %p
+            &nbsp;
+        - else
+          .form-group.has-error.has-feedback
+            %input.form-control#name{ 'aria-describedby' => 'nameErrorStatus', name: :name, placeholder: 'Name', type: :text, value: @folder.name }
+            %span.glyphicon.glyphicon-remove.form-control-feedback{ 'aria-hidden' => true }
+          \&#160;
+          %button.btn.btn-success{ type: :submit }
+            #{sg 'share-alt'} Create New Folder
+          %span.sr-only#nameErrorStatus (error)
+          %span.help-block= @folder.errors[:name].first
+      - unless @folders.count.zero?
+        %table.table.table-condensed.table-hover.table-bordered.table-striped#sort_folders
+          %thead
+            %tr
+              %th{ colspan: 3 } Folder
+          %tbody
+            - @folders.each do |f|
+              %tr.hand{ id: "f_#{f.id}" }
+                %td.middle{ style: f.td_style }
+                  = raw(" &nbsp;#{sg 'sort'} &nbsp;#{f.name}")
+                %td.tight= link_to raw("#{sg 'pencil'} &nbsp;Edit"), 'javascript:;', id: "folder_#{f.id}", type: :button, class: 'btn btn-sm btn-warning'
+                %td.tight= link_to raw("#{sg 'remove'} &nbsp;Delete"), 'javascript:;', id: "ad_folder_#{f.id}", type: :button, class: 'btn btn-sm btn-danger'

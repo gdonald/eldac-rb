@@ -1,0 +1,27 @@
+
+%h4 Section Fields
+
+- unless @section.fields.count.zero?
+  %table.table.table-condensed.table-hover.table-bordered.table-striped#sort_fields
+    %thead
+      %tr
+        %th Field
+        %th Type
+        %th{ colspan: 2 } &nbsp;
+    %tbody
+      - @section.fields.each do |f|
+        %tr.hand{ id: "s_#{f.id}" }
+          %td.middle= " &nbsp;#{sg 'sort'} &nbsp;#{f.name}".html_safe
+          %td.middle= f.field_type
+          %td.tight= link_to "#{sg 'pencil'} &nbsp;Edit".html_safe, edit_section_field_path(@section, f), id: "field_#{f.id}", type: :button, class: 'btn btn-sm btn-warning'
+          %td.tight= link_to "#{sg 'remove'} &nbsp;Delete".html_safe, 'javascript:;', id: "ad_field_#{f.id}", type: :button, class: 'btn btn-sm btn-danger'
+
+%div
+  .panel.panel-default
+    .panel-body
+      = simple_form_for [@section, @field] do |f|
+        = f.hidden_field :section_id, value: @section.id
+        = render partial: 'fields/form', locals: { f: f }
+        = f.button :button, class: 'btn-success' do
+          = sg 'share-alt'
+          Create Field

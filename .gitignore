@@ -14,5 +14,4 @@
 config/database.yml
 coverage
 vendor/bundle
-.idea
 .DS_Store

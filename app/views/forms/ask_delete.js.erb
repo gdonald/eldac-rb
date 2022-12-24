@@ -1,4 +1,0 @@
-<% if @form -%>
-$('body').append("<%= escape_javascript( render( partial: 'forms/ask_delete', locals: { form: @form } ) ) %>");
-$('#adm_<%= @form.id %>').modal();
-<% end -%>

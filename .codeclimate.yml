@@ -1,8 +1,0 @@
-languages:
-  Ruby: true
-  JavaScript: true
-  PHP: false
-  Python: false
-exclude_paths:
-- "app/assets/javascripts/000-spectrum.js"
-- "app/assets/stylesheets/spectrum.css"

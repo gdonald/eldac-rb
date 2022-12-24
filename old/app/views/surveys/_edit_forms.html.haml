@@ -1,0 +1,29 @@
+.row.hidden#forms
+
+  %p &nbsp;
+  %p Project forms to include:
+
+  - unless @survey.project.forms.count.zero?
+
+    .panel.panel-default
+      .panel-body
+
+        %table.table.table-condensed.table-hover.table-bordered.table-striped#forms
+          %thead
+            %tr
+              %th &nbsp;
+              %th Form
+              %th Records
+          %tbody
+            - @survey.project.forms.each do |f|
+              %tr.hand{ id: "f_#{f.id}" }
+                %td.middle.tight
+                  &nbsp;
+                  %input{ type: :checkbox, value: f.id, checked: @survey.survey_forms.collect(&:form_id).include?(f.id) }
+                  &nbsp;
+                %td.middle #{ " &nbsp;#{sg 'sort'} &nbsp;#{f.name}".html_safe }
+                %td.middle= f.records.size
+
+        .form-group
+          %input{ type: :hidden, id: :survey_id, value: @survey.id }
+          = link_to raw("#{sg 'pencil'} &nbsp;Assign Forms"), 'javascript:;', id: 'assign_forms', type: :button, class: 'btn btn-sm btn-success'

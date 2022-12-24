@@ -1,0 +1,576 @@
+  [1m[35m (238.5ms)[0m  [1m[35mCREATE DATABASE "eldac_dev" ENCODING = 'unicode'[0m
+  [1m[35m (74.2ms)[0m  [1m[35mCREATE DATABASE "eldac_test" ENCODING = 'unicode'[0m
+  [1m[35m (301.2ms)[0m  [1m[35mCREATE DATABASE "eldac_dev" ENCODING = 'unicode'[0m
+  [1m[35m (70.0ms)[0m  [1m[35mCREATE DATABASE "eldac_test" ENCODING = 'unicode'[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <main> at ./bin/rake:11)
+  [1m[35m (149.1ms)[0m  [1m[35mCREATE DATABASE "eldac_dev" ENCODING = 'unicode'[0m
+  [1m[35m (38.1ms)[0m  [1m[35mCREATE DATABASE "eldac_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_calcs" CASCADE[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "field_calcs" ("id" bigserial primary key, "field_id" bigint, "content" text)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_field_calcs_on_field_id" ON "field_calcs" ("field_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_opts" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "field_opts" ("id" bigserial primary key, "field_id" bigint, "name" character varying(64), "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_field_opts_on_field_id_and_name" ON "field_opts" ("field_id", "name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_field_opts_on_field_id" ON "field_opts" ("field_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_field_opts_on_name" ON "field_opts" ("name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_field_opts_on_position" ON "field_opts" ("position")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_types" CASCADE[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "field_types" ("id" bigserial primary key, "name" character varying(32) NOT NULL, "fields_count" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_field_types_on_name" ON "field_types" ("name")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "fields" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "fields" ("id" bigserial primary key, "section_id" bigint, "field_type_id" bigint, "name" character varying(64), "default" character varying(255), "field_opts_count" integer DEFAULT 0 NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_fields_on_field_type_id" ON "fields" ("field_type_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_fields_on_name" ON "fields" ("name")[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE INDEX "index_fields_on_position" ON "fields" ("position")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_fields_on_section_id_and_name" ON "fields" ("section_id", "name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_fields_on_section_id" ON "fields" ("section_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "folders" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "folders" ("id" bigserial primary key, "user_id" bigint, "name" character varying(64) NOT NULL, "fg" character varying(6) DEFAULT '000000' NOT NULL, "bg" character varying(6) DEFAULT 'ffffff' NOT NULL, "collapsed" boolean DEFAULT FALSE NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_folders_on_position" ON "folders" ("position")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_folders_on_user_id" ON "folders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "forms" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "forms" ("id" bigserial primary key, "project_id" bigint, "name" character varying(64) NOT NULL, "records_count" integer DEFAULT 0 NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_forms_on_name" ON "forms" ("name")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_forms_on_position" ON "forms" ("position")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_forms_on_project_id_and_name" ON "forms" ("project_id", "name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_forms_on_project_id" ON "forms" ("project_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "pages" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "pages" ("id" bigserial primary key, "form_id" bigint, "name" character varying(64) NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_pages_on_form_id_and_name" ON "pages" ("form_id", "name")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_pages_on_form_id" ON "pages" ("form_id")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE INDEX "index_pages_on_name" ON "pages" ("name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_pages_on_position" ON "pages" ("position")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "project_folders" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "project_folders" ("id" bigserial primary key, "user_id" bigint, "project_id" bigint, "folder_id" bigint)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_project_folders_on_folder_id" ON "project_folders" ("folder_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_project_folders_on_project_id" ON "project_folders" ("project_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "user_proj_fold" ON "project_folders" ("user_id", "project_id", "folder_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_project_folders_on_user_id" ON "project_folders" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "projects" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying(64) NOT NULL, "surveys_count" integer DEFAULT 0 NOT NULL, "forms_count" integer DEFAULT 0 NOT NULL, "deleted" boolean DEFAULT FALSE)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_projects_on_deleted" ON "projects" ("deleted")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_projects_on_name" ON "projects" ("name")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "records" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "records" ("id" bigserial primary key, "user_id" bigint, "form_id" bigint, "survey_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_records_on_form_id" ON "records" ("form_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_records_on_survey_id" ON "records" ("survey_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_records_on_user_id" ON "records" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "relationships" CASCADE[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "relationships" ("id" bigserial primary key, "name" character varying(64) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_relationships_on_name" ON "relationships" ("name")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "sections" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "sections" ("id" bigserial primary key, "page_id" bigint, "name" character varying(64), "fields_count" integer DEFAULT 0 NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_sections_on_name" ON "sections" ("name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_sections_on_page_id_and_name" ON "sections" ("page_id", "name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_sections_on_page_id" ON "sections" ("page_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_sections_on_position" ON "sections" ("position")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "session_id" character varying NOT NULL, "data" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "survey_forms" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "survey_forms" ("id" bigserial primary key, "survey_id" bigint, "form_id" bigint)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_survey_forms_on_form_id" ON "survey_forms" ("form_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_survey_forms_on_survey_id" ON "survey_forms" ("survey_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "surveys" CASCADE[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "surveys" ("id" bigserial primary key, "project_id" bigint, "name" character varying(64) NOT NULL, "active" boolean DEFAULT FALSE NOT NULL, "records_count" integer DEFAULT 0 NOT NULL, "position" integer DEFAULT 0 NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_surveys_on_active" ON "surveys" ("active")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_surveys_on_name" ON "surveys" ("name")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_surveys_on_position" ON "surveys" ("position")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_surveys_on_project_id" ON "surveys" ("project_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "token_types" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "token_types" ("id" bigserial primary key, "name" character varying(32) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_token_types_on_name" ON "token_types" ("name")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_projects" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "user_projects" ("id" bigserial primary key, "user_id" bigint, "project_id" bigint, "relationship_id" bigint)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_user_projects_on_project_id" ON "user_projects" ("project_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_user_projects_on_relationship_id" ON "user_projects" ("relationship_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "user_proj_rel" ON "user_projects" ("user_id", "project_id", "relationship_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_user_projects_on_user_id" ON "user_projects" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_tokens" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "user_tokens" ("id" bigserial primary key, "user_id" bigint, "token_type_id" bigint, "token" character varying(80))[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_user_tokens_on_token" ON "user_tokens" ("token")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_user_tokens_on_token_type_id" ON "user_tokens" ("token_type_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_user_tokens_on_user_id_and_token_type_id" ON "user_tokens" ("user_id", "token_type_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_user_tokens_on_user_id" ON "user_tokens" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying(64) NOT NULL, "p_salt" character varying(80), "p_hash" character varying(80), "fname" character varying(32), "lname" character varying(32), "email_valid" boolean DEFAULT FALSE NOT NULL, "disabled" boolean DEFAULT FALSE NOT NULL, "deleted" boolean DEFAULT FALSE NOT NULL, "last_login" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_users_on_deleted" ON "users" ("deleted")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_users_on_disabled" ON "users" ("disabled")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_users_on_email_valid" ON "users" ("email_valid")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_users_on_last_login" ON "users" ("last_login")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "values" CASCADE[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "values" ("id" bigserial primary key, "record_id" bigint, "field_id" bigint, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_values_on_field_id" ON "values" ("field_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_values_on_record_id_and_field_id" ON "values" ("record_id", "field_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_values_on_record_id" ON "values" ("record_id")[0m
+  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "field_calcs" ADD CONSTRAINT "fk_rails_82e87cca7d"
+FOREIGN KEY ("field_id")
+  REFERENCES "fields" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "field_opts" ADD CONSTRAINT "fk_rails_1bde50486d"
+FOREIGN KEY ("field_id")
+  REFERENCES "fields" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "fields" ADD CONSTRAINT "fk_rails_187492f3ce"
+FOREIGN KEY ("field_type_id")
+  REFERENCES "field_types" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "fields" ADD CONSTRAINT "fk_rails_fb23c35574"
+FOREIGN KEY ("section_id")
+  REFERENCES "sections" ("id")
+[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "folders" ADD CONSTRAINT "fk_rails_2a04d378cf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "forms" ADD CONSTRAINT "fk_rails_34f1d1a43c"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "pages" ADD CONSTRAINT "fk_rails_ffa7b626f0"
+FOREIGN KEY ("form_id")
+  REFERENCES "forms" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "project_folders" ADD CONSTRAINT "fk_rails_686d5e49c5"
+FOREIGN KEY ("folder_id")
+  REFERENCES "folders" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "project_folders" ADD CONSTRAINT "fk_rails_b858db6b8a"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "project_folders" ADD CONSTRAINT "fk_rails_52d5e908b8"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "records" ADD CONSTRAINT "fk_rails_8fe89fb4a4"
+FOREIGN KEY ("form_id")
+  REFERENCES "forms" ("id")
+[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "records" ADD CONSTRAINT "fk_rails_cf433c9836"
+FOREIGN KEY ("survey_id")
+  REFERENCES "surveys" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "records" ADD CONSTRAINT "fk_rails_9ba3ba9afc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "sections" ADD CONSTRAINT "fk_rails_b9060f893a"
+FOREIGN KEY ("page_id")
+  REFERENCES "pages" ("id")
+[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "surveys" ADD CONSTRAINT "fk_rails_2bc08f0973"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "user_projects" ADD CONSTRAINT "fk_rails_f58e9073ce"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "user_projects" ADD CONSTRAINT "fk_rails_59d6f8dc1a"
+FOREIGN KEY ("relationship_id")
+  REFERENCES "relationships" ("id")
+[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "user_projects" ADD CONSTRAINT "fk_rails_d19c0da646"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "user_tokens" ADD CONSTRAINT "fk_rails_5130858131"
+FOREIGN KEY ("token_type_id")
+  REFERENCES "token_types" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "user_tokens" ADD CONSTRAINT "fk_rails_e0a9c15abb"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "values" ADD CONSTRAINT "fk_rails_617cd3cb96"
+FOREIGN KEY ("field_id")
+  REFERENCES "fields" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "values" ADD CONSTRAINT "fk_rails_d10699fc36"
+FOREIGN KEY ("record_id")
+  REFERENCES "records" ("id")
+[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10),
+(11),
+(12),
+(13),
+(14),
+(15),
+(16),
+(17),
+(18),
+(19);
+
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-01-15 21:36:56.836469"], ["updated_at", "2022-01-15 21:36:56.836469"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "b3c1ed185b83d6507b236c77d222e4f198c9399d"], ["created_at", "2022-01-15 21:36:56.838333"], ["updated_at", "2022-01-15 21:36:56.838333"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_calcs" CASCADE[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "field_calcs" ("id" bigserial primary key, "field_id" bigint, "content" text)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_field_calcs_on_field_id" ON "field_calcs" ("field_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_opts" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "field_opts" ("id" bigserial primary key, "field_id" bigint, "name" character varying(64), "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_field_opts_on_field_id_and_name" ON "field_opts" ("field_id", "name")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_field_opts_on_field_id" ON "field_opts" ("field_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_field_opts_on_name" ON "field_opts" ("name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_field_opts_on_position" ON "field_opts" ("position")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_types" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "field_types" ("id" bigserial primary key, "name" character varying(32) NOT NULL, "fields_count" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_field_types_on_name" ON "field_types" ("name")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "fields" CASCADE[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "fields" ("id" bigserial primary key, "section_id" bigint, "field_type_id" bigint, "name" character varying(64), "default" character varying(255), "field_opts_count" integer DEFAULT 0 NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_fields_on_field_type_id" ON "fields" ("field_type_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_fields_on_name" ON "fields" ("name")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_fields_on_position" ON "fields" ("position")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_fields_on_section_id_and_name" ON "fields" ("section_id", "name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_fields_on_section_id" ON "fields" ("section_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "folders" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "folders" ("id" bigserial primary key, "user_id" bigint, "name" character varying(64) NOT NULL, "fg" character varying(6) DEFAULT '000000' NOT NULL, "bg" character varying(6) DEFAULT 'ffffff' NOT NULL, "collapsed" boolean DEFAULT FALSE NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_folders_on_position" ON "folders" ("position")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_folders_on_user_id" ON "folders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "forms" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "forms" ("id" bigserial primary key, "project_id" bigint, "name" character varying(64) NOT NULL, "records_count" integer DEFAULT 0 NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_forms_on_name" ON "forms" ("name")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_forms_on_position" ON "forms" ("position")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_forms_on_project_id_and_name" ON "forms" ("project_id", "name")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_forms_on_project_id" ON "forms" ("project_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "pages" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "pages" ("id" bigserial primary key, "form_id" bigint, "name" character varying(64) NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_pages_on_form_id_and_name" ON "pages" ("form_id", "name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_pages_on_form_id" ON "pages" ("form_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_pages_on_name" ON "pages" ("name")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_pages_on_position" ON "pages" ("position")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "project_folders" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "project_folders" ("id" bigserial primary key, "user_id" bigint, "project_id" bigint, "folder_id" bigint)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_project_folders_on_folder_id" ON "project_folders" ("folder_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_project_folders_on_project_id" ON "project_folders" ("project_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "user_proj_fold" ON "project_folders" ("user_id", "project_id", "folder_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_project_folders_on_user_id" ON "project_folders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "projects" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying(64) NOT NULL, "surveys_count" integer DEFAULT 0 NOT NULL, "forms_count" integer DEFAULT 0 NOT NULL, "deleted" boolean DEFAULT FALSE)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_projects_on_deleted" ON "projects" ("deleted")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_projects_on_name" ON "projects" ("name")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "records" CASCADE[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "records" ("id" bigserial primary key, "user_id" bigint, "form_id" bigint, "survey_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_records_on_form_id" ON "records" ("form_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_records_on_survey_id" ON "records" ("survey_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_records_on_user_id" ON "records" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "relationships" CASCADE[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "relationships" ("id" bigserial primary key, "name" character varying(64) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_relationships_on_name" ON "relationships" ("name")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "sections" CASCADE[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "sections" ("id" bigserial primary key, "page_id" bigint, "name" character varying(64), "fields_count" integer DEFAULT 0 NOT NULL, "position" integer DEFAULT 0 NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_sections_on_name" ON "sections" ("name")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_sections_on_page_id_and_name" ON "sections" ("page_id", "name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_sections_on_page_id" ON "sections" ("page_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_sections_on_position" ON "sections" ("position")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "session_id" character varying NOT NULL, "data" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "survey_forms" CASCADE[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "survey_forms" ("id" bigserial primary key, "survey_id" bigint, "form_id" bigint)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_survey_forms_on_form_id" ON "survey_forms" ("form_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_survey_forms_on_survey_id" ON "survey_forms" ("survey_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "surveys" CASCADE[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "surveys" ("id" bigserial primary key, "project_id" bigint, "name" character varying(64) NOT NULL, "active" boolean DEFAULT FALSE NOT NULL, "records_count" integer DEFAULT 0 NOT NULL, "position" integer DEFAULT 0 NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_surveys_on_active" ON "surveys" ("active")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_surveys_on_name" ON "surveys" ("name")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_surveys_on_position" ON "surveys" ("position")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_surveys_on_project_id" ON "surveys" ("project_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "token_types" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "token_types" ("id" bigserial primary key, "name" character varying(32) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_token_types_on_name" ON "token_types" ("name")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_projects" CASCADE[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "user_projects" ("id" bigserial primary key, "user_id" bigint, "project_id" bigint, "relationship_id" bigint)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_user_projects_on_project_id" ON "user_projects" ("project_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_user_projects_on_relationship_id" ON "user_projects" ("relationship_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "user_proj_rel" ON "user_projects" ("user_id", "project_id", "relationship_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_user_projects_on_user_id" ON "user_projects" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_tokens" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "user_tokens" ("id" bigserial primary key, "user_id" bigint, "token_type_id" bigint, "token" character varying(80))[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_user_tokens_on_token" ON "user_tokens" ("token")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_user_tokens_on_token_type_id" ON "user_tokens" ("token_type_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_user_tokens_on_user_id_and_token_type_id" ON "user_tokens" ("user_id", "token_type_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_user_tokens_on_user_id" ON "user_tokens" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying(64) NOT NULL, "p_salt" character varying(80), "p_hash" character varying(80), "fname" character varying(32), "lname" character varying(32), "email_valid" boolean DEFAULT FALSE NOT NULL, "disabled" boolean DEFAULT FALSE NOT NULL, "deleted" boolean DEFAULT FALSE NOT NULL, "last_login" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_users_on_deleted" ON "users" ("deleted")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_users_on_disabled" ON "users" ("disabled")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_users_on_email_valid" ON "users" ("email_valid")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_users_on_last_login" ON "users" ("last_login")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "values" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "values" ("id" bigserial primary key, "record_id" bigint, "field_id" bigint, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_values_on_field_id" ON "values" ("field_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_values_on_record_id_and_field_id" ON "values" ("record_id", "field_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_values_on_record_id" ON "values" ("record_id")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "field_calcs" ADD CONSTRAINT "fk_rails_82e87cca7d"
+FOREIGN KEY ("field_id")
+  REFERENCES "fields" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "field_opts" ADD CONSTRAINT "fk_rails_1bde50486d"
+FOREIGN KEY ("field_id")
+  REFERENCES "fields" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "fields" ADD CONSTRAINT "fk_rails_187492f3ce"
+FOREIGN KEY ("field_type_id")
+  REFERENCES "field_types" ("id")
+[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "fields" ADD CONSTRAINT "fk_rails_fb23c35574"
+FOREIGN KEY ("section_id")
+  REFERENCES "sections" ("id")
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "folders" ADD CONSTRAINT "fk_rails_2a04d378cf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "forms" ADD CONSTRAINT "fk_rails_34f1d1a43c"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "pages" ADD CONSTRAINT "fk_rails_ffa7b626f0"
+FOREIGN KEY ("form_id")
+  REFERENCES "forms" ("id")
+[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "project_folders" ADD CONSTRAINT "fk_rails_686d5e49c5"
+FOREIGN KEY ("folder_id")
+  REFERENCES "folders" ("id")
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "project_folders" ADD CONSTRAINT "fk_rails_b858db6b8a"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "project_folders" ADD CONSTRAINT "fk_rails_52d5e908b8"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "records" ADD CONSTRAINT "fk_rails_8fe89fb4a4"
+FOREIGN KEY ("form_id")
+  REFERENCES "forms" ("id")
+[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "records" ADD CONSTRAINT "fk_rails_cf433c9836"
+FOREIGN KEY ("survey_id")
+  REFERENCES "surveys" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "records" ADD CONSTRAINT "fk_rails_9ba3ba9afc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "sections" ADD CONSTRAINT "fk_rails_b9060f893a"
+FOREIGN KEY ("page_id")
+  REFERENCES "pages" ("id")
+[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "surveys" ADD CONSTRAINT "fk_rails_2bc08f0973"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "user_projects" ADD CONSTRAINT "fk_rails_f58e9073ce"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "user_projects" ADD CONSTRAINT "fk_rails_59d6f8dc1a"
+FOREIGN KEY ("relationship_id")
+  REFERENCES "relationships" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "user_projects" ADD CONSTRAINT "fk_rails_d19c0da646"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "user_tokens" ADD CONSTRAINT "fk_rails_5130858131"
+FOREIGN KEY ("token_type_id")
+  REFERENCES "token_types" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "user_tokens" ADD CONSTRAINT "fk_rails_e0a9c15abb"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "values" ADD CONSTRAINT "fk_rails_617cd3cb96"
+FOREIGN KEY ("field_id")
+  REFERENCES "fields" ("id")
+[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "values" ADD CONSTRAINT "fk_rails_d10699fc36"
+FOREIGN KEY ("record_id")
+  REFERENCES "records" ("id")
+[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10),
+(11),
+(12),
+(13),
+(14),
+(15),
+(16),
+(17),
+(18),
+(19);
+
+[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-01-15 21:36:56.984983"], ["updated_at", "2022-01-15 21:36:56.984983"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2022-01-15 21:36:56.989259"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "b3c1ed185b83d6507b236c77d222e4f198c9399d"], ["created_at", "2022-01-15 21:36:56.990531"], ["updated_at", "2022-01-15 21:36:56.990531"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFieldType Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."name" = $1 LIMIT $2[0m  [["name", "calculated"], ["LIMIT", 1]]
+  [1m[36mFieldType Create (0.3ms)[0m  [1m[32mINSERT INTO "field_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "calculated"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFieldType Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."name" = $1 LIMIT $2[0m  [["name", "checkbox"], ["LIMIT", 1]]
+  [1m[36mFieldType Create (0.1ms)[0m  [1m[32mINSERT INTO "field_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "checkbox"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFieldType Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."name" = $1 LIMIT $2[0m  [["name", "date"], ["LIMIT", 1]]
+  [1m[36mFieldType Create (0.1ms)[0m  [1m[32mINSERT INTO "field_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "date"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFieldType Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."name" = $1 LIMIT $2[0m  [["name", "datetime"], ["LIMIT", 1]]
+  [1m[36mFieldType Create (0.1ms)[0m  [1m[32mINSERT INTO "field_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "datetime"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFieldType Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."name" = $1 LIMIT $2[0m  [["name", "image"], ["LIMIT", 1]]
+  [1m[36mFieldType Create (0.1ms)[0m  [1m[32mINSERT INTO "field_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "image"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFieldType Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."name" = $1 LIMIT $2[0m  [["name", "radio"], ["LIMIT", 1]]
+  [1m[36mFieldType Create (0.1ms)[0m  [1m[32mINSERT INTO "field_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "radio"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFieldType Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."name" = $1 LIMIT $2[0m  [["name", "select"], ["LIMIT", 1]]
+  [1m[36mFieldType Create (0.1ms)[0m  [1m[32mINSERT INTO "field_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "select"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFieldType Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."name" = $1 LIMIT $2[0m  [["name", "text"], ["LIMIT", 1]]
+  [1m[36mFieldType Create (0.1ms)[0m  [1m[32mINSERT INTO "field_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "text"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFieldType Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."name" = $1 LIMIT $2[0m  [["name", "textarea"], ["LIMIT", 1]]
+  [1m[36mFieldType Create (0.1ms)[0m  [1m[32mINSERT INTO "field_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "textarea"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mFieldType Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "field_types"[0m
+  [1m[36mFieldType Load (0.1ms)[0m  [1m[34mSELECT "field_types".* FROM "field_types" WHERE "field_types"."name" = $1 ORDER BY "field_types"."id" ASC LIMIT $2[0m  [["name", "text"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTokenType Create (0.3ms)[0m  [1m[32mINSERT INTO "token_types" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "validate_email"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTokenType Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "token_types"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRelationship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "relationships" WHERE "relationships"."name" = $1 LIMIT $2[0m  [["name", "owner"], ["LIMIT", 1]]
+  [1m[36mRelationship Create (0.2ms)[0m  [1m[32mINSERT INTO "relationships" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "owner"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRelationship Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "relationships"[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "gdonald@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "p_salt", "p_hash", "fname", "lname", "email_valid", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "gdonald@gmail.com"], ["p_salt", "$2a$12$ZxZ0JWG23sDyDyH4yLbuzu"], ["p_hash", "$2a$12$ZxZ0JWG23sDyDyH4yLbuzua2Ex1Y8IZm6RePITLacJyvy9Pw9ByGa"], ["fname", "Greg"], ["lname", "Donald"], ["email_valid", true], ["created_at", "2022-01-15 21:36:57.303874"], ["updated_at", "2022-01-15 21:36:57.303874"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (1.5ms)[0m  [1m[32mINSERT INTO "projects" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "International Farming Architect"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRelationship Load (0.4ms)[0m  [1m[34mSELECT "relationships".* FROM "relationships" WHERE "relationships"."name" = $1 ORDER BY "relationships"."id" ASC LIMIT $2[0m  [["name", "owner"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserProject Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "user_projects" WHERE "user_projects"."relationship_id" = $1 AND "user_projects"."user_id" = $2 AND "user_projects"."project_id" = $3 LIMIT $4[0m  [["relationship_id", 1], ["user_id", 1], ["project_id", 1], ["LIMIT", 1]]
+  [1m[36mUserProject Create (5.1ms)[0m  [1m[32mINSERT INTO "user_projects" ("user_id", "project_id", "relationship_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["user_id", 1], ["project_id", 1], ["relationship_id", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProject Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFolder Load (1.4ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1 AND ("folders"."position" IS NOT NULL) ORDER BY "folders"."position" DESC LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[36mFolder Create (1.8ms)[0m  [1m[32mINSERT INTO "folders" ("user_id", "name", "fg", "bg", "collapsed", "position") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 1], ["name", "My Projects"], ["fg", "ffffff"], ["bg", "cc0000"], ["collapsed", true], ["position", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProjectFolder Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "project_folders" WHERE "project_folders"."folder_id" = $1 AND "project_folders"."user_id" = $2 AND "project_folders"."project_id" = $3 LIMIT $4[0m  [["folder_id", 1], ["user_id", 1], ["project_id", 1], ["LIMIT", 1]]
+  [1m[36mProjectFolder Create (0.6ms)[0m  [1m[32mINSERT INTO "project_folders" ("user_id", "project_id", "folder_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["user_id", 1], ["project_id", 1], ["folder_id", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProjectFolder Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "project_folders"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mForm Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "forms" WHERE "forms"."name" = $1 AND "forms"."project_id" = $2 LIMIT $3[0m  [["name", "Form 1"], ["project_id", 1], ["LIMIT", 1]]
+  [1m[36mForm Load (0.4ms)[0m  [1m[34mSELECT "forms".* FROM "forms" WHERE "forms"."project_id" = $1 AND ("forms"."position" IS NOT NULL) ORDER BY "forms"."position" DESC LIMIT $2[0m  [["project_id", 1], ["LIMIT", 1]]
+  [1m[36mForm Create (2.3ms)[0m  [1m[32mINSERT INTO "forms" ("project_id", "name", "position") VALUES ($1, $2, $3) RETURNING "id"[0m  [["project_id", 1], ["name", "Form 1"], ["position", 1]]
+  [1m[36mProject Update All (1.1ms)[0m  [1m[33mUPDATE "projects" SET "forms_count" = COALESCE("forms_count", 0) + $1 WHERE "projects"."id" = $2[0m  [["forms_count", 1], ["id", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mForm Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "forms"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPage Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "pages" WHERE "pages"."name" = $1 AND "pages"."form_id" = $2 LIMIT $3[0m  [["name", "Page 1"], ["form_id", 1], ["LIMIT", 1]]
+  [1m[36mPage Load (0.2ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."form_id" = $1 AND ("pages"."position" IS NOT NULL) ORDER BY "pages"."position" DESC LIMIT $2[0m  [["form_id", 1], ["LIMIT", 1]]
+  [1m[36mPage Create (0.5ms)[0m  [1m[32mINSERT INTO "pages" ("form_id", "name", "position") VALUES ($1, $2, $3) RETURNING "id"[0m  [["form_id", 1], ["name", "Page 1"], ["position", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPage Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSection Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "sections" WHERE "sections"."name" = $1 AND "sections"."page_id" = $2 LIMIT $3[0m  [["name", "Section 1"], ["page_id", 1], ["LIMIT", 1]]
+  [1m[36mSection Load (0.6ms)[0m  [1m[34mSELECT "sections".* FROM "sections" WHERE "sections"."page_id" = $1 AND ("sections"."position" IS NOT NULL) ORDER BY "sections"."position" DESC LIMIT $2[0m  [["page_id", 1], ["LIMIT", 1]]
+  [1m[36mSection Create (3.5ms)[0m  [1m[32mINSERT INTO "sections" ("page_id", "name", "position") VALUES ($1, $2, $3) RETURNING "id"[0m  [["page_id", 1], ["name", "Section 1"], ["position", 1]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mSection Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "sections"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mField Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "fields" WHERE "fields"."name" = $1 AND "fields"."section_id" = $2 LIMIT $3[0m  [["name", "Field 1"], ["section_id", 1], ["LIMIT", 1]]
+  [1m[36mFieldType Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "field_types" WHERE "field_types"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mField Load (0.2ms)[0m  [1m[34mSELECT "fields".* FROM "fields" WHERE "fields"."section_id" = $1 AND ("fields"."position" IS NOT NULL) ORDER BY "fields"."position" DESC LIMIT $2[0m  [["section_id", 1], ["LIMIT", 1]]
+  [1m[36mField Create (0.6ms)[0m  [1m[32mINSERT INTO "fields" ("section_id", "field_type_id", "name", "position") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["section_id", 1], ["field_type_id", 8], ["name", "Field 1"], ["position", 1]]
+  [1m[36mFieldType Update All (0.1ms)[0m  [1m[33mUPDATE "field_types" SET "fields_count" = COALESCE("fields_count", 0) + $1 WHERE "field_types"."id" = $2[0m  [["fields_count", 1], ["id", 8]]
+  [1m[36mSection Update All (0.1ms)[0m  [1m[33mUPDATE "sections" SET "fields_count" = COALESCE("fields_count", 0) + $1 WHERE "sections"."id" = $2[0m  [["fields_count", 1], ["id", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mField Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "fields"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSurvey Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "surveys" WHERE "surveys"."name" = $1 AND "surveys"."project_id" = $2 LIMIT $3[0m  [["name", "Survey 1"], ["project_id", 1], ["LIMIT", 1]]
+  [1m[36mSurvey Load (0.5ms)[0m  [1m[34mSELECT "surveys".* FROM "surveys" WHERE "surveys"."project_id" = $1 AND ("surveys"."position" IS NOT NULL) ORDER BY "surveys"."position" DESC LIMIT $2[0m  [["project_id", 1], ["LIMIT", 1]]
+  [1m[36mSurvey Create (9.1ms)[0m  [1m[32mINSERT INTO "surveys" ("project_id", "name", "position", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["project_id", 1], ["name", "Survey 1"], ["position", 1], ["created_at", "2022-01-15 21:36:58.038826"], ["updated_at", "2022-01-15 21:36:58.038826"]]
+  [1m[36mProject Update All (0.2ms)[0m  [1m[33mUPDATE "projects" SET "surveys_count" = COALESCE("surveys_count", 0) + $1 WHERE "projects"."id" = $2[0m  [["surveys_count", 1], ["id", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mSurvey Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "surveys"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSurveyForm Create (0.6ms)[0m  [1m[32mINSERT INTO "survey_forms" ("survey_id", "form_id") VALUES ($1, $2) RETURNING "id"[0m  [["survey_id", 1], ["form_id", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mSurveyForm Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "survey_forms"[0m
