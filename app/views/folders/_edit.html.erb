@@ -1,0 +1,97 @@
+<div class="modal fade" id="fm_<%= @folder.id %>" role="<%= :dialog %>" tabindex="<%= -1 %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="<%= :modal %>" type="<%= :button %>">
+          <span aria-hidden="<%= :true %>">&#215;</span>
+        </button>
+        <h4 class="modal-title">Update Folder</h4>
+      </div>
+      <div class="modal-body">
+        <input id="fg-<%= @folder.id %>_color" name="<%= :fg_color %>" type="<%= :hidden %>" value="<%= @folder.fg %>"></input>
+        <input id="bg-<%= @folder.id %>_color" name="<%= :bg_color %>" type="<%= :hidden %>" value="<%= @folder.bg %>"></input>
+        <div class="row">
+          <div class="col-md-11">
+            <% if @folder.errors[:name].empty? %>
+              <div class="form-group">
+                <label class="control-label" for="<%= :folder_name %>">Name</label>
+                <input class="form-control" id="<%= :folder_name %>" name="<%= :folder_name %>" placeholder="Name" type="<%= :text %>" value="<%= @folder.try(:name) %>"></input>
+              </div>
+            <% else %>
+              <div class="form-group has-error has-feedback">
+                <label class="control-label" for="<%= :folder_name %>">Name</label>
+                <input aria-describedby="nameErrorStatus" class="form-control" id="<%= :folder_name %>" name="<%= :folder_name %>" placeholder="Name" type="<%= :text %>" value="<%= @folder.name %>"></input>
+                <span aria-hidden="<%= true %>" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span class="sr-only" id="folderNameErrorStatus">(error)</span>
+                <span class="help-block">
+                  <%= @folder.errors[:name].first %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <% if @folder.errors[:fg].empty? %>
+              <div class="form-group">
+                <label class="control-label" for="<%= :fg %>">Foreground</label>
+                <div class="clearfix"></div>
+                <input class="form-control" id="fg-<%= @folder.id %>" name="<%= :fg %>" placeholder="000000" type="<%= :text %>" value="<%= @folder.try(:fg) %>"></input>
+              </div>
+            <% else %>
+              <div class="form-group has-error has-feedback">
+                <label class="control-label" for="<%= :fg %>">Foreground</label>
+                <div class="clearfix"></div>
+                <input aria-describedby="nameErrorStatus" class="form-control" id="fg-<%= @folder.id %>" name="<%= :fg %>" placeholder="#000000" type="<%= :text %>" value="<%= @folder.fg %>"></input>
+                <span aria-hidden="<%= true %>" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span class="sr-only" id="fgErrorStatus">(error)</span>
+                <span class="help-block">
+                  <%= @folder.errors[:fg].first %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-3">
+            <% if @folder.errors[:bg].empty? %>
+              <div class="form-group">
+                <label class="control-label" for="<%= :bg %>">Background</label>
+                <div class="clearfix"></div>
+                <input class="form-control" id="bg-<%= @folder.id %>" name="<%= :bg %>" placeholder="ffffff" type="<%= :text %>" value="<%= @folder.try(:bg) %>"></input>
+              </div>
+            <% else %>
+              <div class="form-group has-error has-feedback">
+                <label class="control-label" for="<%= :bg %>">Background</label>
+                <div class="clearfix"></div>
+                <input aria-describedby="nameErrorStatus" class="form-control" id="bg-<%= @folder.id %>" name="<%= :bg %>" placeholder="#ffffff" type="<%= :text %>" value="<%= @folder.bg %>"></input>
+                <span aria-hidden="<%= true %>" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span class="sr-only" id="bgErrorStatus">(error)</span>
+                <span class="help-block">
+                  <%= @folder.errors[:bg].first %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="<%= :modal %>" type="<%= :button %>">#{sg 'remove'} &nbsp;Close</button>
+        <button class="btn btn-primary" id="<%= :save %>" type="<%= :button %>">#{sg 'share-alt'} &nbsp;Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>  
+$(function(){
+  $('#save').click( function(){
+    $.ajax({
+      method: 'put',
+      url: '/folders/#{@folder.id}',
+      data: {
+        name: $('#folder_name').val(),
+        fg: $('#fg-#{@folder.id}_color').val().replace('#', ''),
+        bg: $('#bg-#{@folder.id}_color').val().replace('#', '')
+      }
+    });
+  });
+});
+</script>

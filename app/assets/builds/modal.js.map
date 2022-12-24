@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../javascript/modal.js"],
+  "sourcesContent": ["\nwindow.doModal = function(id, title, content, closeBtnTitle, closeBtnClass) {\n  let html = '<div id=\"' + id + '\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">';\n  html += '<div class=\"modal-dialog\">';\n  html += '<div class=\"modal-content\">';\n  html += '<div class=\"modal-header\">';\n  html += '<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">';\n  html += '<span aria-hidden=\"true\">&times;</span>';\n  html += '</button>';\n  html += '<h4 class=\"modal-title\">' + title + '</h4>';\n  html += '</div>';\n  html += '<div class=\"modal-body\">';\n  html += content;\n  html += '</div>';\n  html += '<div class=\"modal-footer\">';\n  html += '<button type=\"button\" class=\"btn btn-default btn-' + closeBtnClass;\n  html += '\" data-dismiss=\"modal\">' + closeBtnTitle + '</button>';\n  html += '</div>';\n  html += '</div>';\n  html += '</div>';\n  html += '</div>';\n  $('body').append(html);\n  $('#' + id).modal();\n};\n"],
+  "mappings": ";;AACA,SAAO,UAAU,SAAS,IAAI,OAAO,SAAS,eAAe,eAAe;AAC1E,QAAI,OAAO,cAAc,KAAK;AAC9B,YAAQ;AACR,YAAQ;AACR,YAAQ;AACR,YAAQ;AACR,YAAQ;AACR,YAAQ;AACR,YAAQ,6BAA6B,QAAQ;AAC7C,YAAQ;AACR,YAAQ;AACR,YAAQ;AACR,YAAQ;AACR,YAAQ;AACR,YAAQ,sDAAsD;AAC9D,YAAQ,4BAA4B,gBAAgB;AACpD,YAAQ;AACR,YAAQ;AACR,YAAQ;AACR,YAAQ;AACR,MAAE,MAAM,EAAE,OAAO,IAAI;AACrB,MAAE,MAAM,EAAE,EAAE,MAAM;AAAA,EACpB;",
+  "names": []
+}

@@ -1,0 +1,21 @@
+<div class="h3 page-header hidden-xs">
+  <%= link_to 'Projects', projects_path %>
+  <%= dl %>
+  New Project
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="h3 panel-title">Project Info</div>
+  </div>
+  <div class="panel-body">
+    <%= simple_form_for @project do |f| %>
+      <%= render partial: 'projects/form', locals: { f: f } %>
+      <div class="form-group">
+        <button class="btn btn-success" type="<%= :submit %>">
+          <%= sg('share-alt') %>
+          &nbsp;Create Project
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="modal fade" id="adm_<%= @survey.id %>" role="<%= :dialog %>" tabindex="<%= -1 %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="<%= :modal %>" type="<%= :button %>">
+          <span aria-hidden="<%= :true %>">&#215;</span>
+        </button>
+        <h4 class="modal-title">Confirm Survey Delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the #{@survey.name} survey?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="<%= :modal %>" type="<%= :button %>">#{sg 'remove'} &nbsp;Close</button>
+        <button class="btn btn-danger" id="<%= :delete %>" type="<%= :button %>">#{sg 'share-alt'} &nbsp;Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(function(){ $('#delete').on( 'click', function() {
+  $.ajax({
+    method: 'delete',
+    url: "/projects/#{@project.id}/surveys/#{@survey.id}"
+  });
+}); });
+</script>

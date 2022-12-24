@@ -1,0 +1,19 @@
+<div class="h3 page-header hidden-xs">
+  <%= link_to 'Projects', projects_path %>
+  <%= dl %>
+  <%= link_to @project.name, edit_project_path(@project) %>
+  <%= dl %>
+  Edit Survey
+</div>
+<ul class="nav nav-tabs">
+  <li id="li_survey" role="<%= :presentation %>">
+    <%= link_to 'Survey', 'javascript:;', id: :tab_survey %>
+  </li>
+  <li id="li_forms" role="<%= :presentation %>">
+    <%= link_to 'Forms', 'javascript:;', id: :tab_forms %>
+  </li>
+</ul>
+<div class="col-md-6">
+  <%= render partial: 'surveys/edit_survey' %>
+  <%= render partial: 'surveys/edit_forms' %>
+</div>

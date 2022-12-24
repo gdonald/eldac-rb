@@ -1,0 +1,29 @@
+<div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="control-label" for="<%= :folder %>">
+          Choose Folder
+        </label>
+        <select class="form-control" id="folder_id" name="<%= :folder_id %>">
+          <option value="0"></option>
+          <% @folders.each do |f| %>
+            <% if f.id == session[:organize_folder_id] %>
+              <option selected="<%= :selected %>" value="<%= f.id %>">
+                <%= f.name %>
+              </option>
+            <% else %>
+              <option value="<%= f.id %>">
+                <%= f.name %>
+              </option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+      <div id="projects_list"></div>
+    </div>
+  </div>
+</div>
+<script>
+$(function(){ getProjects() });
+</script>

@@ -1,0 +1,26 @@
+<h3 class="page-header hidden-xs">
+  <%= link_to 'Projects', projects_path %>
+  <%= dl %>
+  Organize Projects
+</h3>
+<div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= render 'projects/folders' %>
+    </div>
+    <div class="col-md-6">
+      <% unless @folders.count.zero? %>
+        <%= render 'projects/projects' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% if session[:show].present? %>
+  <% if session[:show] == 'edit_folder' %>
+    <script>
+      $( function(){ editFolder(#{session[:id]}) } );
+    </script>
+    <% session[:show] = nil %>
+    <% session[:id] = nil %>
+  <% end %>
+<% end %>

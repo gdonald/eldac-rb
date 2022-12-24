@@ -4,6 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.3'
 
 gem 'activeadmin', '~> 2.13.1'
+gem 'acts_as_list'
+gem 'coffee-rails'
 gem 'factory_bot_rails', '~> 6.2.0'
 gem 'jquery-rails', '~> 4.5.1'
 gem 'kaminari', '~> 1.2.2'
@@ -18,6 +20,8 @@ gem 'cssbundling-rails'
 gem 'jbuilder'
 gem 'bcrypt', '~> 3.1.7'
 gem 'sassc-rails'
+gem 'haml-rails'
+gem 'simple_form'
 
 group :development, :test do
   gem 'brakeman', '~> 5.4.0'

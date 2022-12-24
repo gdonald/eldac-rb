@@ -1,0 +1,21 @@
+<div class="h3 page-header hidden-xs">
+  <%= link_to 'Projects', projects_path %>
+  <%= dl %>
+  Edit Project
+</div>
+<ul class="nav nav-tabs">
+  <li id="li_project" role="<%= :presentation %>">
+    <%= link_to 'Project', 'javascript:;', id: :tab_project %>
+  </li>
+  <li id="li_forms" role="<%= :presentation %>">
+    <%= link_to 'Forms', 'javascript:;', id: :tab_forms %>
+  </li>
+  <li id="li_surveys" role="<%= :presentation %>">
+    <%= link_to 'Surveys', 'javascript:;', id: :tab_surveys %>
+  </li>
+</ul>
+<div class="col-md-6">
+  <%= render partial: 'projects/edit_project' %>
+  <%= render partial: 'projects/edit_forms' %>
+  <%= render partial: 'projects/edit_surveys' %>
+</div>

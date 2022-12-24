@@ -1,0 +1,44 @@
+<div class="row hidden" id="forms">
+  <p>&nbsp;</p>
+  <% unless @project.forms.count.zero? %>
+    <table class="table table-condensed table-hover table-bordered table-striped" id="sort_forms">
+      <thead>
+        <tr>
+          <th>Form</th>
+          <th>Records</th>
+          <th colspan="2">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.forms.each do |f| %>
+          <tr class="hand" id="f_<%= f.id %>">
+            <td class="middle">#{ " &nbsp;#{sg 'sort'} &nbsp;#{f.name}".html_safe }</td>
+            <td class="middle">
+              <%= f.records.size %>
+            </td>
+            <td class="tight">
+              <%= link_to raw("#{sg 'pencil'} &nbsp;Edit"), edit_project_form_path(@project, f), id: "form_#{f.id}", type: :button, class: 'btn btn-sm btn-warning' %>
+            </td>
+            <td class="tight">
+              <%= link_to raw("#{sg 'remove'} &nbsp;Delete"), 'javascript:;', id: "ad_form_#{f.id}", type: :button, class: 'btn btn-sm btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= simple_form_for [@project, @form] do |f| %>
+          <%= f.hidden_field :project_id, value: @project.id %>
+          <%= render partial: 'forms/form', locals: { f: f } %>
+          <%= f.button :button, class: 'btn-success' do %>
+            <%= sg 'share-alt' %>
+            Create New Form
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<h3 class="page-header hidden-xs">Projects</h3>
+<div>
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p>
+              <%= link_to raw("#{sg 'plus'}&nbsp; New Project"), new_project_path, type: 'button', class: 'btn btn-success' %>
+              <% unless @projects_count.zero? %>
+                <%= link_to raw("#{sg 'wrench'}&nbsp; Organize Projects"), organize_projects_path, type: 'button', %>
+                  class: 'btn btn-info'
+                <% end %>
+              <% end %>
+            </p>
+            <% if @projects %>
+              <%= render 'projects/projects_list' %>
+            <% elsif @folders %>
+              <%= render 'projects/folders_list' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

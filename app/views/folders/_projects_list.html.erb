@@ -1,0 +1,34 @@
+<label class="control-label" for="<%= :folder %>">
+  Assign Projects to #{@folder.name}
+</label>
+<table class="table table-condensed table-hover table-bordered table-striped">
+  <thead>
+    <tr>
+      <th class="col-md-1 center">
+        <%= check_box_tag "checkall", session[:organize_check_all] == 1 %>
+      </th>
+      <th>
+        <div class="right">
+          <%= check_box_tag 'assigned', '1', session[:organize_assigned] == 1, {} %>
+          Show Assigned
+        </div>
+        Project
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |p| %>
+      <tr>
+        <td class="col-md-1 center">
+          <%= check_box_tag "p_#{p.id}", p.id, ProjectFolder.should_be_checked(@project_folders, session[:organize_folder_id], p), {} %>
+        </td>
+        <td>
+          <div class="right" id="s_<%= p.id %>" style="display:none">
+            Saved!
+          </div>
+          <%= p.name %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

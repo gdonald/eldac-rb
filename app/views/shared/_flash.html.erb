@@ -1,0 +1,12 @@
+<% if flash[:notice] %>
+  <script>
+    doModal('noticeModal', 'Notice', "<p>#{flash[:notice]}</p>", 'Close', 'primary')
+  </script>
+  <% flash[:notice] = nil %>
+<% end %>
+<% if flash[:error] %>
+  <script>
+    doModal('errorModal', 'Error', "<p>#{flash[:error]}</p>", 'Close', 'primary')
+  </script>
+  <% flash[:error] = nil %>
+<% end %>
