@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateUserProjects < ActiveRecord::Migration[5.2]
+class CreateUserProjects < ActiveRecord::Migration[7.0]
   def change
     create_table :user_projects do |t|
       t.references :user, index: true, foreign_key: true

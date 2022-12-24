@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateValues < ActiveRecord::Migration[5.2]
+class CreateValues < ActiveRecord::Migration[7.0]
   def change
     create_table :values do |t|
       t.references :record, index: true, foreign_key: true

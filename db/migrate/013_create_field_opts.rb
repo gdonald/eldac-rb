@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateFieldOpts < ActiveRecord::Migration[5.2]
+class CreateFieldOpts < ActiveRecord::Migration[7.0]
   def change
     create_table :field_opts do |t|
       t.references :field, index: true, foreign_key: true
