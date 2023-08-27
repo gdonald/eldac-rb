@@ -209,7 +209,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     net-ssh (7.0.1)
-    nio4r (2.5.8)
+    nio4r (2.5.9)
     nokogiri (1.14.3-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.3-x86_64-linux)
@@ -222,7 +222,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (5.0.1)
-    puma (6.0.1)
+    puma (6.3.1)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.4)
@@ -391,7 +391,7 @@ DEPENDENCIES
   kaminari (~> 1.2.2)
   pg (~> 1.1)
   pry
-  puma (~> 6.0.1)
+  puma (~> 6.3.1)
   rails (~> 7.0.4)
   rspec-rails
   rubocop
