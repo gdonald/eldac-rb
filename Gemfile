@@ -19,6 +19,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'debug'
+  gem 'factory_bot_rails', '~> 6.2.0'
   gem 'rspec-rails', '~> 6.0.0'
 end
 
