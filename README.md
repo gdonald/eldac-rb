@@ -1,5 +1,7 @@
 # Eldac
 
+[![Ruby on Rails CI](https://github.com/gdonald/eldac/actions/workflows/eldac.yml/badge.svg)](https://github.com/gdonald/eldac/actions/workflows/eldac.yml)
+
 ### What is it?
 
 Eldac is a web application for collecting electronic data and making it available for searching and display.  "Eldac" is an acronym for "electronic data capture".
