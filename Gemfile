@@ -21,6 +21,8 @@ gem 'turbo-rails'
 # gem 'image_processing', '~> 1.2'
 
 group :development, :test do
+  gem 'brakeman'
+  gem 'bundler-audit'
   gem 'debug'
   gem 'factory_bot_rails', '~> 6.2.0'
   gem 'rspec-rails', '~> 6.0.0'
