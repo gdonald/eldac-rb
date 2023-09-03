@@ -1,6 +1,6 @@
 # Eldac
 
-[![Ruby on Rails CI](https://github.com/gdonald/eldac/actions/workflows/eldac.yml/badge.svg)](https://github.com/gdonald/eldac/actions/workflows/eldac.yml)
+[![GitHub](https://img.shields.io/github/license/gdonald/eldac?color=0000aa)](https://github.com/gdonald/eldac/blob/main/LICENSE) &nbsp; [![Ruby on Rails CI](https://github.com/gdonald/eldac/actions/workflows/eldac.yml/badge.svg)](https://github.com/gdonald/eldac/actions/workflows/eldac.yml)
 
 ### What is it?
 
