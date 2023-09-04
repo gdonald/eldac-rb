@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Eldac</title>
+    <title>ELDAC - Electronic Data Capture</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,7 +12,20 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="container mx-auto mt-12 px-5">
+      <div class="border-b border-slate-200 mb-5">
+        <%= form_with method: 'get', url: search_path, class: 'float-right' do |form| %>
+        <%= form.text_field :q,
+            placeholder: 'Search...',
+            value: params[:q],
+            class: 'px-3 py-2 bg-slate-100 border border-slate-300 rounded-md
+              text-lg shadow-sm placeholder-slate-400 focus:outline-none
+              focus:border-slate-300 focus:ring-1 focus:ring-slate-300
+              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200
+              disabled:shadow-none' %>
+        <% end %>
+        <h1 class="font-bold text-5xl mb-4">ELDAC</h1>
+      </div>
       <%= yield %>
     </main>
   </body>

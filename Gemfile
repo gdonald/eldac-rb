@@ -25,6 +25,7 @@ group :development, :test do
   gem 'bundler-audit'
   gem 'debug'
   gem 'factory_bot_rails', '~> 6.2.0'
+  gem 'pry'
   gem 'rspec-rails', '~> 6.0.0'
   gem 'rubocop', require: false
   gem 'rubocop-rails'
@@ -34,4 +35,8 @@ end
 
 group :development do
   gem 'web-console'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 5.3.0'
 end
