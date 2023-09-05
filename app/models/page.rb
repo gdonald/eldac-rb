@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class Page < ApplicationRecord
-  validates :url, presence: true, uniqueness: true
-  validates :title, presence: true
-  validates :content, presence: true
+  belongs_to :query
+  has_many :page_crawls, dependent: :destroy
+
+  validates :title, length: { maximum: 255 }
+  validates :content, length: { maximum: (2**18) - 1 }
 
   scope :by_term, lambda { |term|
     pages = Page
@@ -18,4 +20,17 @@ class Page < ApplicationRecord
 
     pages
   }
+
+  def url
+    "#{base_url}#{query_string}"
+  end
+
+  def base_url
+    host = query.path.host
+    "#{host.scheme.name}://#{host.name}"
+  end
+
+  def query_string
+    "#{query.path.value}?#{query.value}"
+  end
 end

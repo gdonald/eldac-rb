@@ -5,9 +5,13 @@ git_source(:github) { |_repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
 
+gem 'aasm', '~> 5.5.0'
 gem 'bcrypt', '~> 3.1.7'
+gem 'good_job', '~> 3.18.2'
+gem 'httparty', '~> 0.21.0'
 gem 'importmap-rails'
 gem 'jbuilder'
+gem 'nokogiri', '~> 1.15.4'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.7', '>= 7.0.7.2'
