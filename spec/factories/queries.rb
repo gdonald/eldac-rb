@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :query do
     path
-    sequence(:value) { |n| "?query=#{n}" }
+    sequence(:value) { |n| "query=#{n}" }
   end
 end
