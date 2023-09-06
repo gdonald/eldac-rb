@@ -31,6 +31,16 @@ class Page < ApplicationRecord
   end
 
   def query_string
-    "#{query.path.value}?#{query.value}"
+    str = query.path.value
+    str += "?#{query.value}" if query.value.present?
+    str
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id query_id title blurb content created_at updated_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[page_crawls query]
   end
 end

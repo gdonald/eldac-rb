@@ -24,9 +24,14 @@
               disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200
               disabled:shadow-none' %>
         <% end %>
-        <h1 class="font-bold text-5xl mb-4">ELDAC</h1>
+        <h1 class="font-bold text-5xl mb-4">
+          <%= link_to 'ELDAC', root_path %>
+        </h1>
       </div>
       <%= yield %>
     </main>
+    <div class="container mx-auto border-t border-slate-100 mt-20 mb-10">
+      <%= render 'shared/footer' %>
+    </div>
   </body>
 </html>

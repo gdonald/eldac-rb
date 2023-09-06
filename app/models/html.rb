@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PageCrawl < ApplicationRecord
+class Html < ApplicationRecord
   include AASM
 
   aasm do
@@ -23,6 +23,6 @@ class PageCrawl < ApplicationRecord
   belongs_to :page
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[id page_id aasm_state error created_at updated_at]
+    %w[id page_id aasm_state content error created_at updated_at]
   end
 end

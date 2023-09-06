@@ -4,16 +4,25 @@ class UrlStorageService
   attr_reader :uri, :scheme
 
   def initialize(str)
+    url = PageView.find_by(url: str)
+    return if url
+
     @uri = URI(str)
     @scheme = Scheme.find_by(name: uri.scheme)
   end
 
   def save!
-    ActiveRecord::Base.transaction do
-      page = save_page!(save_query!(save_path!(save_host!)))
+    return unless uri && scheme
 
-      page_crawl = PageCrawl.create!(page:)
-      CrawlJob.perform_later(page_crawl.id)
+    ActiveRecord::Base.transaction do
+      host = save_host!
+
+      if host.name == 'gregdonald.com' # TODO: use an allowed-list
+        page = save_page!(save_query!(save_path!(host)))
+
+        page_crawl = PageCrawl.create!(page:)
+        CrawlJob.perform_later(page_crawl.id)
+      end
     end
   end
 

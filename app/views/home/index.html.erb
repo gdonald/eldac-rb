@@ -1,4 +1,6 @@
-<h1 class="font-bold text-5xl text-center mb-5">ELDAC</h1>
+<h1 class="font-bold text-5xl text-center mb-12">
+  <%= link_to 'ELDAC', root_path %>
+</h1>
 <%= form_with method: 'get', url: search_path, class: 'text-center' do |form| %>
   <%= form.text_field :q,
         placeholder: 'Search...',

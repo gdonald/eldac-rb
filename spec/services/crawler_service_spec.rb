@@ -16,7 +16,8 @@ RSpec.describe CrawlerService do
       </html>
     HTML
   end
-  let(:response) { instance_double(HTTParty::Response, body:) }
+  let(:headers) { { 'content-type' => 'text/html' } }
+  let(:response) { instance_double(HTTParty::Response, body:, headers:) }
 
   describe '#crawl!' do
     before do
@@ -26,8 +27,24 @@ RSpec.describe CrawlerService do
     it 'crawls the page' do
       service.crawl!(page)
       page.reload
-
       expect(page.title).to eq('Page Title')
+    end
+
+    it 'saves html' do
+      expect do
+        service.crawl!(page)
+      end.to change(Html, :count).by(1)
+    end
+
+    it 'saves html content' do
+      service.crawl!(page)
+      expect(Html.last.content).to eq('<p>Content</p>')
+    end
+
+    it 'creates an html content job' do
+      allow(HtmlContentJob).to receive(:perform_later)
+      service.crawl!(page)
+      expect(HtmlContentJob).to have_received(:perform_later).once
     end
   end
 end

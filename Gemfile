@@ -6,6 +6,7 @@ git_source(:github) { |_repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 gem 'aasm', '~> 5.5.0'
+gem 'activeadmin', '~> 3.0.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'good_job', '~> 3.18.2'
 gem 'httparty', '~> 0.21.0'
@@ -16,13 +17,11 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.7', '>= 7.0.7.2'
 gem 'redis', '~> 4.0'
+gem 'sassc-rails'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'tailwindcss-rails'
 gem 'turbo-rails'
-
-# gem 'sassc-rails'
-# gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   gem 'brakeman'
