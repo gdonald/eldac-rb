@@ -10,7 +10,7 @@ Eldac is a web application for collecting electronic data and making it availabl
 
     rails new \
       --database=postgresql \
-      --css=tailwind \
+      --css=boostrap \
       --skip-test \
       --skip-bootsnap \
       eldac

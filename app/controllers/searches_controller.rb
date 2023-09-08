@@ -7,5 +7,7 @@ class SearchesController < ApplicationController
              else
                Page.none
              end
+
+    @pages = @pages.page(params[:page])
   end
 end

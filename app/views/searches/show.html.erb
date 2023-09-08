@@ -1,9 +1,16 @@
 <p>Search Results:</p>
 
 <% @pages.each do |page| %>
-<article class="mt-4">
-  <h2 class="font-bold text-xl text-slate-700"><%= link_to page.title, page.url %></h2>
-  <p class="text-slate-400 text-sm"><%= link_to page.url, page.url %></p>
-  <p class="text-black-500"><%= page.blurb %></p>
-</article>
+  <article class="mt-4">
+    <h2 class="fs-5"><%= link_to page.title, page.url, class: 'text-decoration-none link-dark' %></h2>
+    <p class="fs-6 pt-0 pb-0"><%= link_to page.url, page.url, class: 'text-decoration-none link-dark link-opacity-50' %></p>
+    <p class="fs-6 pt-0"><%= page.blurb %></p>
+  </article>
 <% end %>
+
+<div class="">
+<%= paginate @pages,
+      theme: 'bootstrap-5',
+      pagination_class: "pagination-sm flex-wrap justify-content-center",
+      nav_class: "d-inline-block" %>
+</div>

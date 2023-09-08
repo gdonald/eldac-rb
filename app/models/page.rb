@@ -7,6 +7,8 @@ class Page < ApplicationRecord
   validates :title, length: { maximum: 255 }
   validates :content, length: { maximum: (2**18) - 1 }
 
+  self.per_page = 10
+
   scope :by_term, lambda { |term|
     pages = Page
 

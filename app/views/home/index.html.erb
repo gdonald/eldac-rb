@@ -1,13 +1,13 @@
-<h1 class="font-bold text-5xl text-center mb-12">
-  <%= link_to 'ELDAC', root_path %>
-</h1>
-<%= form_with method: 'get', url: search_path, class: 'text-center' do |form| %>
-  <%= form.text_field :q,
-        placeholder: 'Search...',
-        value: params[:q],
-        class: 'px-3 py-2 bg-slate-100 border border-slate-300 rounded-md
-          text-lg shadow-sm placeholder-slate-400 focus:outline-none
-          focus:border-slate-300 focus:ring-1 focus:ring-slate-300
-          disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200
-          disabled:shadow-none' %>
-<% end %>
+<div class="mx-auto home-margin">
+  <div class="mx-auto text-center">
+    <h1><%= link_to 'ELDAC', root_path, class: 'text-decoration-none link-dark' %></h1>
+  </div>
+  <div class="mx-auto mt-4 col-md-4 col-xs-2">
+    <%= form_with method: 'get', url: search_path do |form| %>
+      <div class="input-group mb-3">
+        <%= form.text_field :q, placeholder: 'Search', value: params[:q], class: 'form-control' %>
+        <button class="input-group-text" id="search"><i class="bi-search"></i></button>
+      </div>
+    <% end %>
+  </div>
+</div>
