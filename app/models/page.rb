@@ -5,9 +5,7 @@ class Page < ApplicationRecord
   has_many :page_crawls, dependent: :destroy
 
   validates :title, length: { maximum: 255 }
-  validates :content, length: { maximum: (2**18) - 1 }
-
-  self.per_page = 10
+  validates :content, length: { maximum: 262_144 }
 
   scope :by_term, lambda { |term|
     pages = Page

@@ -188,6 +188,38 @@ CREATE TABLE public.good_jobs (
 
 
 --
+-- Name: host_rules; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.host_rules (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL,
+    allowed boolean DEFAULT false NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: host_rules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.host_rules_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: host_rules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.host_rules_id_seq OWNED BY public.host_rules.id;
+
+
+--
 -- Name: hosts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -195,6 +227,7 @@ CREATE TABLE public.hosts (
     id bigint NOT NULL,
     scheme_id bigint NOT NULL,
     name character varying(255) NOT NULL,
+    last_crawled_at timestamp without time zone,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -294,7 +327,7 @@ CREATE TABLE public.pages (
     id bigint NOT NULL,
     query_id bigint NOT NULL,
     title character varying(255),
-    blurb character varying(1023),
+    blurb text,
     content text,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
@@ -308,7 +341,7 @@ CREATE TABLE public.pages (
 CREATE TABLE public.paths (
     id bigint NOT NULL,
     host_id bigint NOT NULL,
-    value character varying(1023) NOT NULL,
+    value text NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -321,7 +354,7 @@ CREATE TABLE public.paths (
 CREATE TABLE public.queries (
     id bigint NOT NULL,
     path_id bigint NOT NULL,
-    value character varying(1023),
+    value text,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -333,7 +366,7 @@ CREATE TABLE public.queries (
 
 CREATE TABLE public.schemes (
     id bigint NOT NULL,
-    name character varying(7) NOT NULL,
+    name character varying(8) NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -461,6 +494,13 @@ ALTER TABLE ONLY public.crawl_jobs ALTER COLUMN id SET DEFAULT nextval('public.c
 
 
 --
+-- Name: host_rules id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.host_rules ALTER COLUMN id SET DEFAULT nextval('public.host_rules_id_seq'::regclass);
+
+
+--
 -- Name: hosts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -571,6 +611,14 @@ ALTER TABLE ONLY public.good_job_settings
 
 ALTER TABLE ONLY public.good_jobs
     ADD CONSTRAINT good_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: host_rules host_rules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.host_rules
+    ADD CONSTRAINT host_rules_pkey PRIMARY KEY (id);
 
 
 --
@@ -757,6 +805,20 @@ CREATE INDEX index_good_jobs_on_scheduled_at ON public.good_jobs USING btree (sc
 
 
 --
+-- Name: index_host_rules_on_allowed; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_host_rules_on_allowed ON public.host_rules USING btree (allowed);
+
+
+--
+-- Name: index_host_rules_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_host_rules_on_name ON public.host_rules USING btree (name);
+
+
+--
 -- Name: index_hosts_on_scheme_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -920,6 +982,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('1'),
 ('10'),
 ('11'),
+('12'),
 ('2'),
 ('3'),
 ('4'),

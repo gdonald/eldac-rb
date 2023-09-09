@@ -19,7 +19,7 @@ class CrawlerService
   private
 
   def headers
-    { 'User-Agent' => 'Eldac/1.0 (https://eldac.io)' }
+    { 'User-Agent' => ENV.fetch('USER_AGENT', 'Example/1.0 (https://example.com)') }
   end
 
   def html(doc)

@@ -3,7 +3,7 @@
 class CreateSchemes < ActiveRecord::Migration[7.0]
   def change
     create_table :schemes do |t|
-      t.string :name, null: false, index: { unique: true }, limit: (2**3) - 1
+      t.string :name, null: false, index: { unique: true }, limit: 8
       t.timestamps
     end
   end

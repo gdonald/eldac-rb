@@ -35,12 +35,16 @@ module Eldac
       max_threads: 5,
       poll_interval: 30,
       shutdown_timeout: 25,
-      enable_cron: false,
+      enable_cron: true,
       cron: {
-        # example: {
-        #         cron: '0 * * * *',
-        #         class: 'ExampleJob'
-        # },
+        crawl_job: {
+          cron: '* * * * *',
+          class: 'CrawlSchedulerJob',
+          args: [],
+          kwargs: {},
+          set: {},
+          description: 'Schedule crawling of pages'
+        }
       }
     }
 

@@ -11,10 +11,11 @@ ActiveAdmin.register Host do
     column :scheme
     column :name
     column('Paths') do |host|
-      host.paths.collect do |path|
+      host.paths.limit(10).collect do |path|
         link_to(path.value, "/admin/paths/#{path.id}") if path.value.present?
       end.compact.join(', ').html_safe # rubocop:disable Rails/OutputSafety
     end
+    column :last_crawled_at
     column :created_at
     column :updated_at
     actions

@@ -8,6 +8,6 @@ class SearchesController < ApplicationController
                Page.none
              end
 
-    @pages = @pages.page(params[:page])
+    @pages = @pages.page(params[:page]).per(10)
   end
 end

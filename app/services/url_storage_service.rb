@@ -16,9 +16,9 @@ class UrlStorageService
 
     ActiveRecord::Base.transaction do
       host = save_host!
-
-      # TODO: use an allowed-list
-      save_page!(save_query!(save_path!(host))) if host.name == 'gregdonald.com'
+      path = save_path!(host)
+      query = save_query!(path)
+      save_page!(query)
     end
   end
 
@@ -52,10 +52,24 @@ class UrlStorageService
   end
 
   def crawl_page!(page)
+    return unless host_crawl_allowed
+
     page_crawl = PageCrawl.find_by(page:)
     return if page_crawl
 
-    page_crawl = PageCrawl.create!(page:)
-    CrawlJob.perform_later(page_crawl.id)
+    PageCrawl.create!(page:)
+  end
+
+  def host_crawl_allowed
+    host_rule = HostRule.find_by(name: uri.host)
+
+    case ENV.fetch('HOST_RULE_DEFAULT', 'deny')
+    when 'deny'
+      host_rule&.allowed?
+    when 'allow'
+      host_rule.nil? || !host_rule.allowed?
+    else
+      raise 'Invalid HOST_RULE_DEFAULT value'
+    end
   end
 end
