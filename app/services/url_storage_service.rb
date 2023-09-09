@@ -17,12 +17,8 @@ class UrlStorageService
     ActiveRecord::Base.transaction do
       host = save_host!
 
-      if host.name == 'gregdonald.com' # TODO: use an allowed-list
-        page = save_page!(save_query!(save_path!(host)))
-
-        page_crawl = PageCrawl.create!(page:)
-        CrawlJob.perform_later(page_crawl.id)
-      end
+      # TODO: use an allowed-list
+      save_page!(save_query!(save_path!(host))) if host.name == 'gregdonald.com'
     end
   end
 
@@ -49,6 +45,17 @@ class UrlStorageService
   def save_page!(query)
     page = Page.find_by(query:)
     page ||= Page.create!(query:)
+
+    crawl_page!(page)
+
     page
+  end
+
+  def crawl_page!(page)
+    page_crawl = PageCrawl.find_by(page:)
+    return if page_crawl
+
+    page_crawl = PageCrawl.create!(page:)
+    CrawlJob.perform_later(page_crawl.id)
   end
 end

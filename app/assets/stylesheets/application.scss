@@ -5,3 +5,35 @@
   margin-top: calc(100vh / 2 - 132px);
 }
 
+a {
+  color: #505050;
+}
+
+a:hover {
+  color: #000;
+}
+
+a.page-link {
+  color: #505050;
+}
+
+a.page-link:hover {
+  color: #000;
+}
+
+.active > .page-link {
+  background-color: #666;
+  border-color: #666;
+}
+
+p.page-link {
+  line-height: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+

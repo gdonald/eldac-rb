@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nocov:
 ActiveAdmin.register PageView do
   remove_filter :page
 
@@ -13,3 +14,4 @@ ActiveAdmin.register PageView do
     column :url
   end
 end
+# :nocov:

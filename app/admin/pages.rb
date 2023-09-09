@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nocov:
 ActiveAdmin.register Page do
   remove_filter :query
   remove_filter :page_crawls
@@ -17,3 +18,4 @@ ActiveAdmin.register Page do
     actions
   end
 end
+# :nocov:

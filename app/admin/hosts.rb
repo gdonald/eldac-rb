@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nocov:
 ActiveAdmin.register Host do
   remove_filter :scheme
   remove_filter :paths
@@ -19,3 +20,4 @@ ActiveAdmin.register Host do
     actions
   end
 end
+# :nocov:

@@ -1,16 +1,16 @@
-<p>Search Results:</p>
+<p>Search results for "<%= params[:q] %>":</p>
 
 <% @pages.each do |page| %>
   <article class="mt-4">
-    <h2 class="fs-5"><%= link_to page.title, page.url, class: 'text-decoration-none link-dark' %></h2>
-    <p class="fs-6 pt-0 pb-0"><%= link_to page.url, page.url, class: 'text-decoration-none link-dark link-opacity-50' %></p>
+    <h2 class="fs-5"><%= link_to page.title, page.url, class: 'text-decoration-none link-dark', target: '_blank' %></h2>
+    <p class="fs-6 pt-0 pb-0 page-link"><%= link_to page.url, page.url, class: 'text-decoration-none link-dark link-opacity-50', target: '_blank' %></p>
     <p class="fs-6 pt-0"><%= page.blurb %></p>
   </article>
 <% end %>
 
-<div class="">
-<%= paginate @pages,
-      theme: 'bootstrap-5',
-      pagination_class: "pagination-sm flex-wrap justify-content-center",
-      nav_class: "d-inline-block" %>
+<div class="mt-4">
+  <%= paginate @pages,
+        theme: 'bootstrap-5',
+        pagination_class: "pagination-sm flex-wrap justify-content-center",
+        nav_class: "d-inline-block" %>
 </div>

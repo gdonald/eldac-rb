@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nocov:
 ActiveAdmin.register Query do
   remove_filter :path
 
@@ -15,3 +16,4 @@ ActiveAdmin.register Query do
     actions
   end
 end
+# :nocov:
