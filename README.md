@@ -6,6 +6,15 @@
 
 Eldac is a web application for collecting electronic data and making it available for searching and display.  "Eldac" is an acronym for "electronic data capture".
 
+### Features:
+
+- [x] Add web crawler
+- [x] Add basic search
+- [ ] Add hostname allow/ignore lists.
+- [ ] API search endpoint
+- [ ] Full-text ranked search
+- [ ] Add previous searches list
+
 ### Rails - The command used to create this project:
 
     rails new \
