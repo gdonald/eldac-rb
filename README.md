@@ -10,9 +10,10 @@ Eldac is a web application for collecting electronic data and making it availabl
 
 - [x] Add web crawler
 - [x] Add basic search
-- [ ] Add hostname allow/ignore lists.
+- [ ] Add hostname allow/ignore lists
+- [ ] Add hostname request throttling
 - [ ] API search endpoint
-- [ ] Add Full-text ranked search
+- [ ] Add full-text ranked search
 - [ ] Handle robots.txt
 - [ ] Handle sitemap.xml
 - [ ] Add "previous searches" list
