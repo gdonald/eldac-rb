@@ -12,8 +12,10 @@ Eldac is a web application for collecting electronic data and making it availabl
 - [x] Add basic search
 - [ ] Add hostname allow/ignore lists.
 - [ ] API search endpoint
-- [ ] Full-text ranked search
-- [ ] Add previous searches list
+- [ ] Add Full-text ranked search
+- [ ] Handle robots.txt
+- [ ] Handle sitemap.xml
+- [ ] Add "previous searches" list
 
 ### Rails - The command used to create this project:
 
