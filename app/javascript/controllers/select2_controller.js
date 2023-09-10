@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+// import "select2"
 
 export default class extends Controller {
   connect() {
@@ -6,16 +7,22 @@ export default class extends Controller {
 
     var select2Executed = false;
     document.addEventListener('turbo:load', function() {
+    //$(function() {
       console.log('turbo:load')
 
-      if ('jqueryReady' in window) { 
-        console.log('jqueryReady')
+      //console.log('importmapScriptsLoaded:', window.importmapScriptsLoaded)
+
+      if (window.importmapScriptsLoaded === true) { 
+        console.log('importmapScriptsLoaded :)')
       } else {
-        console.log('jquery not ready')
+        console.log('importmapScriptsLoaded not ready')
       }
 
-      if ('jqueryReady' in window) { 
+      if (window.importmapScriptsLoaded) { 
         if (!select2Executed) {
+
+          //console.log($('#hello'));
+
           $('.js-data-example-ajax').select2({
             ajax: {
               url: 'https://api.github.com/search/repositories',
@@ -23,8 +30,11 @@ export default class extends Controller {
               // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
           });
+
+          
+
           select2Executed = true;
-          log('select2 executed')
+          console.log('select2 executed')
         }
       }
     })
