@@ -9,6 +9,71 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: btree_gin; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS btree_gin WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION btree_gin; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION btree_gin IS 'support for indexing common datatypes in GIN';
+
+
+--
+-- Name: btree_gist; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS btree_gist WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION btree_gist; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION btree_gist IS 'support for indexing common datatypes in GiST';
+
+
+--
+-- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION fuzzystrmatch; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
+
+
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
+--
+-- Name: pg_search_dmetaphone(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.pg_search_dmetaphone(text) RETURNS text
+    LANGUAGE sql IMMUTABLE STRICT
+    AS $_$ SELECT array_to_string(ARRAY(SELECT dmetaphone(unnest(regexp_split_to_array($1, E'\s+')))), ' ') $_$;
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -850,14 +915,14 @@ CREATE INDEX index_page_crawls_on_page_id ON public.page_crawls USING btree (pag
 -- Name: index_pages_on_blurb; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_pages_on_blurb ON public.pages USING btree (blurb);
+CREATE INDEX index_pages_on_blurb ON public.pages USING gin (blurb);
 
 
 --
 -- Name: index_pages_on_content; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_pages_on_content ON public.pages USING btree (content);
+CREATE INDEX index_pages_on_content ON public.pages USING gin (content);
 
 
 --
@@ -871,7 +936,7 @@ CREATE INDEX index_pages_on_query_id ON public.pages USING btree (query_id);
 -- Name: index_pages_on_title; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_pages_on_title ON public.pages USING btree (title);
+CREATE INDEX index_pages_on_title ON public.pages USING gin (title);
 
 
 --
@@ -879,13 +944,6 @@ CREATE INDEX index_pages_on_title ON public.pages USING btree (title);
 --
 
 CREATE INDEX index_paths_on_host_id ON public.paths USING btree (host_id);
-
-
---
--- Name: index_paths_on_host_id_and_value; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_paths_on_host_id_and_value ON public.paths USING btree (host_id, value);
 
 
 --
@@ -983,6 +1041,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('10'),
 ('11'),
 ('12'),
+('13'),
 ('2'),
 ('3'),
 ('4'),

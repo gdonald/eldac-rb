@@ -1,11 +1,15 @@
 <div class="mx-auto home-margin">
   <div class="mx-auto text-center">
-    <h1><%= link_to 'ELDAC', root_path, class: 'text-decoration-none link-dark' %></h1>
+    <h1><%= link_to site_name, root_path, class: 'text-decoration-none link-dark' %></h1>
   </div>
-  <div class="mx-auto mt-4 col-md-4 col-xs-2">
+  <div class="mx-auto mt-4 col-md-4 col-xs-2" data-controller="select2">
     <%= form_with method: 'get', url: search_path do |form| %>
       <div class="input-group mb-3">
-        <%= form.text_field :q, placeholder: 'Search', value: '', class: 'form-control', required: true %>
+        
+        <%#= form.text_field :q, placeholder: 'Search', value: '', class: 'form-control', required: true %>
+
+        <select class="js-data-example-ajax"></select>
+
         <button class="input-group-text" id="search"><i class="bi-search"></i></button>
       </div>
     <% end %>

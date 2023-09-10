@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="h-100">
   <head>
-    <title>ELDAC - Electronic Data Capture</title>
+    <title><%= site_name %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -18,7 +18,7 @@
           </div>
         <% end %>
         <h1 class="">
-          <%= link_to 'ELDAC', root_path, class: 'text-decoration-none link-dark' %>
+          <%= link_to site_name, root_path, class: 'text-decoration-none link-dark' %>
         </h1>
       </div>
       <div class="container mx-auto mt-3 pb-5">

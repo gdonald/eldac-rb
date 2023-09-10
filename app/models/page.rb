@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 class Page < ApplicationRecord
+  include PgSearch::Model
+
   belongs_to :query
   has_many :page_crawls, dependent: :destroy
 
   validates :title, length: { maximum: 255 }
   validates :content, length: { maximum: 262_144 }
 
-  scope :by_term, lambda { |term|
-    pages = Page
-
-    t = Page.arel_table
-    query = term.downcase.gsub(/[^-a-z0-9_ ]/, '')
-    qs = / /.match?(query) ? query.split : [query]
-    qs.each do |q|
-      q = "%#{q}%"
-      pages = pages.where(t[:title].matches(q).or(t[:content].matches(q)))
-    end
-
-    pages
-  }
+  pg_search_scope :by_term,
+                  against: {
+                    content: 'A',
+                    title: 'B',
+                    blurb: 'C'
+                  },
+                  using: {
+                    trigram: {},
+                    dmetaphone: {},
+                    tsearch: { prefix: true }
+                  }
 
   def url
     "#{base_url}#{query_string}"

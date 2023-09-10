@@ -20,7 +20,27 @@ class HtmlContentService
   end
 
   def content(doc)
-    doc.to_s.gsub(/<.*?>/, '').gsub("\n", ' ').gsub("\r", '').gsub(/\s+/, ' ').strip
+    text = remove_html_tags(doc.to_s)
+    words = remove_stop_words(text.split)
+    words = remove_leading_trailing(words)
+
+    words.join(' ').strip[0..2712]
+  end
+
+  def remove_leading_trailing(words)
+    words.map do |word|
+      Clean::LEADING_TRAILING.map do |regx|
+        word.gsub(regx, '\1')
+      end
+    end.flatten.uniq
+  end
+
+  def remove_stop_words(words)
+    words.map(&:downcase) - Clean::STOP_WORDS
+  end
+
+  def remove_html_tags(text)
+    text.gsub(/<.*?>/, '').gsub("\n", ' ').gsub("\r", '').gsub(/\s+/, ' ').strip
   end
 
   def find_hrefs(doc, page)

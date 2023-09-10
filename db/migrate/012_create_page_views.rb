@@ -10,7 +10,6 @@ class CreatePageViews < ActiveRecord::Migration[7.0]
         hosts.name AS host_name,
         paths.value AS path_value,
         queries.value AS query_value,
-
         CONCAT(
           schemes.name,
           '://',

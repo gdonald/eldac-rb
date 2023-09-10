@@ -7,6 +7,5 @@ class CreatePaths < ActiveRecord::Migration[7.0]
       t.text :value, null: false, index: true, limit: 1024
       t.timestamps
     end
-    add_index :paths, %i[host_id value], unique: true
   end
 end
