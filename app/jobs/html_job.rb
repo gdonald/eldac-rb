@@ -2,14 +2,24 @@
 
 class HtmlJob
   include Sidekiq::Job
+  attr_reader :service_klass
+
+  def initialize(service_klass = HtmlService)
+    @service_klass = service_klass
+  end
 
   def perform(id)
     html = Html.find(id)
     return unless html
 
-    html.run!
+    build!(html)
+  end
 
-    service = HtmlService.new(html)
+  private
+
+  def build!(html)
+    html.run!
+    service = service_klass.new(html)
     begin
       service.build!
       html.complete!

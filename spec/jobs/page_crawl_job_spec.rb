@@ -2,23 +2,28 @@
 
 require 'rails_helper'
 
-RSpec.describe CrawlJob do
-  subject(:crawl_job) { described_class.new(service) }
+RSpec.describe PageCrawlJob do
+  subject(:page_crawl_job) { described_class.new(service_klass) }
 
-  let(:service) { CrawlerService.new }
+  let(:service_klass) { PageCrawlService }
+  let(:service) { instance_double(PageCrawlService) }
   let(:page_crawl) { create(:page_crawl) }
+
+  before do
+    allow(service_klass).to receive(:new).and_return(service)
+  end
 
   describe '#perform' do
     it 'runs the page crawl' do
       allow(service).to receive(:crawl!).and_return(true)
-      crawl_job.perform(page_crawl.id)
+      page_crawl_job.perform(page_crawl.id)
       expect(page_crawl.reload).to be_completed
     end
 
     context 'with a failure' do
       before do
         allow(service).to receive(:crawl!).and_raise(StandardError, 'error')
-        crawl_job.perform(page_crawl.id)
+        page_crawl_job.perform(page_crawl.id)
         page_crawl.reload
       end
 

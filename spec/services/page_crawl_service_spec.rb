@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe CrawlerService do
-  subject(:service) { described_class.new }
+RSpec.describe PageCrawlService do
+  subject(:service) { described_class.new(page) }
 
   let(:page) { create(:page) }
   let(:body) do
     <<~HTML
-      <html>
+      <html lang="en">
         <head>
           <title>Page Title</title>
         </head>
@@ -25,26 +25,20 @@ RSpec.describe CrawlerService do
     end
 
     it 'crawls the page' do
-      service.crawl!(page)
+      service.crawl!
       page.reload
       expect(page.title).to eq('Page Title')
     end
 
     it 'saves html' do
       expect do
-        service.crawl!(page)
+        service.crawl!
       end.to change(Html, :count).by(1)
     end
 
     it 'saves html content' do
-      service.crawl!(page)
+      service.crawl!
       expect(Html.last.content).to eq('<p>Content</p>')
-    end
-
-    it 'creates an html content job' do
-      allow(HtmlContentJob).to receive(:perform_later)
-      service.crawl!(page)
-      expect(HtmlContentJob).to have_received(:perform_later).once
     end
   end
 end

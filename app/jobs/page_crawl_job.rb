@@ -2,15 +2,24 @@
 
 class PageCrawlJob
   include Sidekiq::Job
+  attr_reader :service_klass
+
+  def initialize(service_klass = PageCrawlService)
+    @service_klass = service_klass
+  end
 
   def perform(id)
     page_crawl = PageCrawl.find(id)
     return unless page_crawl
 
+    run!(page_crawl)
+  end
+
+  private
+
+  def run!(page_crawl)
     page_crawl.run!
-
-    service = PageCrawlService.new(page_crawl.page)
-
+    service = service_klass.new(page_crawl.page)
     begin
       service.crawl!
       page_crawl.complete!
