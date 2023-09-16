@@ -1,0 +1,9 @@
+url_job_factory:
+  cron: "* * * * *"
+  class: 'UrlJobFactory'
+page_crawl_job_factory:
+  cron: "* * * * *"
+  class: 'PageCrawlJobFactory'
+html_job_factory:
+  cron: "* * * * *"
+  class: 'HtmlJobFactory'

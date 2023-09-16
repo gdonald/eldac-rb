@@ -1,21 +1,17 @@
 # frozen_string_literal: true
 
-class HtmlContentJob < ApplicationJob
-  attr_reader :service
-
-  queue_as :default
-
-  def initialize(service = HtmlContentService.new)
-    @service = service
-    super
-  end
+class HtmlJob
+  include Sidekiq::Job
 
   def perform(id)
     html = Html.find(id)
+    return unless html
+
     html.run!
 
+    service = HtmlService.new(html)
     begin
-      service.build!(html)
+      service.build!
       html.complete!
     rescue StandardError => e
       html.error = e.message

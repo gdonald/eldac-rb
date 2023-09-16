@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
-class HtmlContentService
-  def build!(html)
+class HtmlService
+  attr_reader :html
+
+  def initialize(html)
+    @html = html
+  end
+
+  def build!
     page = html.page
     doc = Nokogiri::HTML(html.content)
 
@@ -15,6 +21,7 @@ class HtmlContentService
   private
 
   def blurb(doc)
+    # TODO: make this better
     h = doc.search('h1').first || doc.search('h2').first || doc.search('h3').first
     h.to_s.gsub(/<.*?>/, '').strip
   end
@@ -53,7 +60,9 @@ class HtmlContentService
   end
 
   def create_url(href, page)
-    url = href.start_with?('http') ? href : URI.join(page.base_url, href).to_s
-    UrlStorageService.new(url).save!
+    value = (href.start_with?('http') ? href : URI.join(page.base_url, href).to_s).downcase
+
+    url = Url.find_by(value:)
+    Url.create!(value:) unless url
   end
 end

@@ -25,29 +25,6 @@ module Eldac
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    config.active_job.queue_adapter = :good_job
-    config.good_job = {
-      preserve_job_records: true,
-      retry_on_unhandled_error: false,
-      on_thread_error: ->(exception) { Raven.capture_exception(exception) },
-      execution_mode: :async,
-      queues: '*',
-      max_threads: 5,
-      poll_interval: 30,
-      shutdown_timeout: 25,
-      enable_cron: true,
-      cron: {
-        crawl_job: {
-          cron: '* * * * *',
-          class: 'CrawlSchedulerJob',
-          args: [],
-          kwargs: {},
-          set: {},
-          description: 'Schedule crawling of pages'
-        }
-      }
-    }
-
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

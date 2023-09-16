@@ -6,6 +6,8 @@ ActiveAdmin.register Html do
   remove_filter :page
   filter :aasm_state, as: :select, collection: -> { Html.aasm.states.map(&:name) }
 
+  permit_params :aasm_state, :value, :error
+
   index do
     selectable_column
     id_column
@@ -18,6 +20,15 @@ ActiveAdmin.register Html do
     column :created_at
     column :updated_at
     actions
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :aasm_state, as: :select, collection: Html.aasm.states.map(&:name)
+      f.input :content
+      f.input :error
+    end
+    f.actions
   end
 end
 # :nocov:

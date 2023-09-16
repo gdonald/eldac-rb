@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UrlStorageService
+class UrlService
   attr_reader :uri, :scheme
 
   def initialize(str)
@@ -25,19 +25,22 @@ class UrlStorageService
   private
 
   def save_host!
-    host = Host.find_by(scheme:, name: uri.host)
+    name = uri.host&.downcase
+    host = Host.find_by(scheme:, name:)
     host ||= Host.create!(scheme:, name: uri.host)
     host
   end
 
   def save_path!(host)
-    path = Path.find_by(host:, value: uri.path)
+    value = uri.path&.downcase
+    path = Path.find_by(host:, value:)
     path ||= Path.create!(host:, value: uri.path)
     path
   end
 
   def save_query!(path)
-    query = Query.find_by(path:, value: uri.query)
+    value = uri.query&.downcase
+    query = Query.find_by(path:, value:)
     query ||= Query.create!(path:, value: uri.query)
     query
   end

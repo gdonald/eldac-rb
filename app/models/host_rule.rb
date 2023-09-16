@@ -8,7 +8,6 @@ class HostRule < ApplicationRecord
   scope :denied, -> { where(allowed: [nil, false]) }
 
   before_save :downcase_name
-  after_commit :crawl
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[id name allowed created_at updated_at]
@@ -18,14 +17,5 @@ class HostRule < ApplicationRecord
 
   def downcase_name
     self.name = name.downcase
-  end
-
-  def crawl
-    return unless allowed?
-
-    Scheme.find_each do |scheme|
-      url = "#{scheme.name}://#{name}"
-      UrlStorageService.new(url).save!
-    end
   end
 end

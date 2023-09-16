@@ -1,21 +1,18 @@
 # frozen_string_literal: true
 
-class CrawlJob < ApplicationJob
-  attr_reader :service
-
-  queue_as :default
-
-  def initialize(service = CrawlerService.new)
-    @service = service
-    super
-  end
+class PageCrawlJob
+  include Sidekiq::Job
 
   def perform(id)
     page_crawl = PageCrawl.find(id)
+    return unless page_crawl
+
     page_crawl.run!
 
+    service = PageCrawlService.new(page_crawl.page)
+
     begin
-      service.crawl!(page_crawl.page)
+      service.crawl!
       page_crawl.complete!
     rescue StandardError => e
       page_crawl.error = e.message

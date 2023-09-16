@@ -6,7 +6,7 @@ ActiveAdmin.register PageView do
 
   index do
     column('Page') do |page_view|
-      link_to page_view.page.title, admin_page_path(page_view.page)
+      link_to page_view.page.title || 'Title Not Found', admin_page_path(page_view.page)
     end
     column('URL') do |page_view|
       link_to page_view.page.url, admin_page_path(page_view.page)

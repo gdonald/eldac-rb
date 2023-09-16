@@ -6,10 +6,6 @@ module Clean # rubocop:disable Metrics/ModuleLength
   end.flatten.freeze
 
   STOP_WORDS = [ # rubocop:disable Metrics/CollectionLiteralLength
-    '·',
-    '©',
-    '-',
-    'a',
     "a's",
     'able',
     'about',
@@ -305,7 +301,6 @@ module Clean # rubocop:disable Metrics/ModuleLength
     'howbeit',
     'however',
     'hundred',
-    'i',
     "i'd",
     "i'll",
     "i'm",
@@ -348,7 +343,6 @@ module Clean # rubocop:disable Metrics/ModuleLength
     'itself',
     'itse”',
     'just',
-    'k',
     'keep',
     'keeps',
     'kept',
@@ -742,7 +736,6 @@ module Clean # rubocop:disable Metrics/ModuleLength
     'using',
     'usually',
     'uucp',
-    'v',
     'value',
     'various',
     'versus',

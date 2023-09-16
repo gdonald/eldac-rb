@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
-class CrawlerService
+class PageCrawlService
   include HTTParty
 
-  def crawl!(page)
+  attr_reader :page
+
+  def initialize(page)
+    @page = page
+  end
+
+  def crawl!
     response = HTTParty.get(page.url, { headers: })
     return unless html?(response)
 
@@ -12,8 +18,7 @@ class CrawlerService
     page.title = doc.title
     page.save!
 
-    html = Html.create!(page:, content: html(doc))
-    HtmlContentJob.perform_later(html.id)
+    Html.create!(page:, content: html(doc))
   end
 
   private

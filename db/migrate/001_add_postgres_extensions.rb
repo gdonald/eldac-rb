@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AddPostgresExtensions < ActiveRecord::Migration[7.0]
+  # TODO: are all these actually required?
   EXTENSIONS = %w[plpgsql pg_trgm fuzzystrmatch btree_gin btree_gist].freeze
 
   def up
@@ -19,7 +20,7 @@ class AddPostgresExtensions < ActiveRecord::Migration[7.0]
 
   def down
     EXTENSIONS.each do |ext|
-      execute "DROP EXTENSION IF EXISTS  #{ext}"
+      execute "DROP EXTENSION IF EXISTS #{ext}"
     end
 
     say_with_time('Dropping support functions for pg_search :dmetaphone') do

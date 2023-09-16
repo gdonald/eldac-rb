@@ -10,7 +10,7 @@ ActiveAdmin.register PageCrawl do
     selectable_column
     id_column
     column('Title') do |page_crawl|
-      link_to page_crawl.page.title, admin_page_path(page_crawl.page)
+      link_to page_crawl.page.title || 'Title Not Found', admin_page_path(page_crawl.page)
     end
     column('Url') do |page_crawl|
       link_to page_crawl.page.url, admin_page_path(page_crawl.page)
