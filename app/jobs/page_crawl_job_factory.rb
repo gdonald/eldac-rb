@@ -4,8 +4,9 @@ class PageCrawlJobFactory
   include Sidekiq::Job
 
   def perform
-    PageCrawl.created.limit(10).find_each do |page_crawl|
-      PageCrawlJob.perform_async(page_crawl.id)
+    PageCrawl.crawlable.limit(10).each_with_index do |page_crawl, index|
+      seconds = index * 5
+      PageCrawlJob.perform_in(seconds, page_crawl.id)
     end
   end
 end

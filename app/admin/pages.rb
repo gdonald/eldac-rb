@@ -8,6 +8,9 @@ ActiveAdmin.register Page do
   index do
     selectable_column
     id_column
+    column('Url') do |page|
+      link_to page.url, admin_url_path(page.url)
+    end
     column :title
     column :blurb
     column('Content') do |html|

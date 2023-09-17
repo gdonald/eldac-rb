@@ -16,7 +16,11 @@ ActiveAdmin.register PageCrawl do
       link_to page_crawl.page.url, admin_page_path(page_crawl.page)
     end
     column :aasm_state
-    column :error
+    column('Error') do |page_crawl|
+      content_tag :pre do
+        content_tag :code, page_crawl.error
+      end
+    end
     column :created_at
     column :updated_at
     actions

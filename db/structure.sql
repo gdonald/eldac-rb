@@ -130,7 +130,7 @@ CREATE TABLE public.hosts (
     id bigint NOT NULL,
     scheme_id bigint NOT NULL,
     name character varying(255) NOT NULL,
-    crawled_at timestamp without time zone,
+    last_crawled_at timestamp without time zone,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -605,7 +605,7 @@ CREATE INDEX index_htmls_on_page_id ON public.htmls USING btree (page_id);
 -- Name: index_page_crawls_on_page_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_page_crawls_on_page_id ON public.page_crawls USING btree (page_id);
+CREATE UNIQUE INDEX index_page_crawls_on_page_id ON public.page_crawls USING btree (page_id);
 
 
 --
@@ -676,6 +676,13 @@ CREATE UNIQUE INDEX index_schemes_on_name ON public.schemes USING btree (name);
 --
 
 CREATE INDEX index_urls_on_aasm_state ON public.urls USING btree (aasm_state);
+
+
+--
+-- Name: index_urls_on_value; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_urls_on_value ON public.urls USING btree (value);
 
 
 --

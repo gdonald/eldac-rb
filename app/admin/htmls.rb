@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :nocov:
-ActiveAdmin.register Html do
+ActiveAdmin.register Html do # rubocop:disable Metrics/BlockLength
   preserve_default_filters!
   remove_filter :page
   filter :aasm_state, as: :select, collection: -> { Html.aasm.states.map(&:name) }
@@ -16,7 +16,11 @@ ActiveAdmin.register Html do
       html.content[0..127]
     end
     column :aasm_state
-    column :error
+    column('Error') do |html|
+      content_tag :pre do
+        content_tag :code, html.error
+      end
+    end
     column :created_at
     column :updated_at
     actions

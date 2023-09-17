@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UrlService
-  attr_reader :uri, :scheme
+  attr_reader :uri, :scheme, :host
 
   def initialize(str)
     url = PageView.find_by(url: str)
@@ -12,55 +12,42 @@ class UrlService
   end
 
   def save!
-    return unless uri && scheme
+    return unless uri && scheme && uri.host.present?
 
     ActiveRecord::Base.transaction do
       host = save_host!
       path = save_path!(host)
       query = save_query!(path)
-      save_page!(query)
+      page = save_page!(query)
+      crawl_page!(page)
     end
   end
 
   private
 
   def save_host!
-    name = uri.host&.downcase
-    host = Host.find_by(scheme:, name:)
-    host ||= Host.create!(scheme:, name: uri.host)
-    host
+    name = uri.host.downcase
+    Host.find_or_create_by(scheme:, name:)
   end
 
   def save_path!(host)
     value = uri.path&.downcase
-    path = Path.find_by(host:, value:)
-    path ||= Path.create!(host:, value: uri.path)
-    path
+    Path.find_or_create_by(host:, value:)
   end
 
   def save_query!(path)
     value = uri.query&.downcase
-    query = Query.find_by(path:, value:)
-    query ||= Query.create!(path:, value: uri.query)
-    query
+    Query.find_or_create_by(path:, value:)
   end
 
   def save_page!(query)
-    page = Page.find_by(query:)
-    page ||= Page.create!(query:)
-
-    crawl_page!(page)
-
-    page
+    Page.find_or_create_by(query:)
   end
 
   def crawl_page!(page)
     return unless host_crawl_allowed
 
-    page_crawl = PageCrawl.find_by(page:)
-    return if page_crawl
-
-    PageCrawl.create!(page:)
+    PageCrawl.find_or_create_by(page:)
   end
 
   def host_crawl_allowed

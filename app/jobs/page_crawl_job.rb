@@ -4,13 +4,15 @@ class PageCrawlJob
   include Sidekiq::Job
   attr_reader :service_klass
 
+  sidekiq_options retry: 5
+
   def initialize(service_klass = PageCrawlService)
     @service_klass = service_klass
   end
 
   def perform(id)
-    page_crawl = PageCrawl.find(id)
-    return unless page_crawl
+    page_crawl = PageCrawl.find_by(id:)
+    return unless page_crawl.created?
 
     run!(page_crawl)
   end

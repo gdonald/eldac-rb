@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 module Clean # rubocop:disable Metrics/ModuleLength
-  LEADING_TRAILING = ['"', "'", '\.', ',', ';', ':'].map do |c|
-    [/^#{c}(.*)/, /(.*)#{c}$/]
-  end.flatten.freeze
-
   STOP_WORDS = [ # rubocop:disable Metrics/CollectionLiteralLength
     "a's",
     'able',

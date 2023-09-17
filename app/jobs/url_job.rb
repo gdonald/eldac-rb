@@ -4,13 +4,15 @@ class UrlJob
   include Sidekiq::Job
   attr_reader :service_klass
 
+  sidekiq_options retry: 1
+
   def initialize(service_klass = UrlService)
     @service_klass = service_klass
   end
 
   def perform(id)
-    url = Url.find(id)
-    return unless url
+    url = Url.find_by(id:)
+    return unless url.created?
 
     run!(url)
   end

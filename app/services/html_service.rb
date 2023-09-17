@@ -21,25 +21,29 @@ class HtmlService
   private
 
   def blurb(doc)
-    # TODO: make this better
-    h = doc.search('h1').first || doc.search('h2').first || doc.search('h3').first
-    h.to_s.gsub(/<.*?>/, '').strip
+    elem = nil
+    %w[h1 h2 h3 h4 h5 p].each do |tag|
+      elem ||= doc.search(tag).first
+    end
+
+    elem.to_s.gsub(/<.*?>/, '').strip
   end
 
   def content(doc)
     text = remove_html_tags(doc.to_s)
-    words = remove_stop_words(text.split)
-    words = remove_leading_trailing(words)
+    words = remove_non_words(text.split)
+    words = remove_stop_words(words)
+    words = remove_small_words(words)
 
     words.join(' ').strip[0..2712]
   end
 
-  def remove_leading_trailing(words)
-    words.map do |word|
-      Clean::LEADING_TRAILING.map do |regx|
-        word.gsub(regx, '\1')
-      end
-    end.flatten.uniq
+  def remove_small_words(words)
+    words.select { |word| word.length > 1 }
+  end
+
+  def remove_non_words(words)
+    words.grep(/^[a-z]+$/)
   end
 
   def remove_stop_words(words)

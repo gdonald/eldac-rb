@@ -14,7 +14,11 @@ ActiveAdmin.register Url do
     id_column
     column :value
     column :aasm_state
-    column :error
+    column('Error') do |url|
+      content_tag :pre do
+        content_tag :code, url.error
+      end
+    end
     column :created_at
     column :updated_at
     actions
