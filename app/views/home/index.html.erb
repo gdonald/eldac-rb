@@ -2,7 +2,7 @@
   <div class="mx-auto text-center">
     <h1><%= link_to site_name, root_path, class: 'text-decoration-none link-dark' %></h1>
   </div>
-  <div class="mx-auto mt-4 col-md-4 col-xs-2" data-controller="select2">
+  <div class="mx-auto mt-4 col-md-4 col-xs-2" data-controller="home">
     <%= form_with method: 'get', url: search_path do |form| %>
       <div class="input-group mb-3">
         <%= form.text_field :q, placeholder: 'Search', value: '', class: 'form-control', required: true %>

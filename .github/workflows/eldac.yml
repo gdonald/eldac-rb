@@ -46,9 +46,6 @@ jobs:
       - name: Set up database schema
         run: bin/rails db:schema:load
 
-      - name: Precompile assets
-        run: bundle exec rake assets:precompile
-
       - name: Run tests
         run: xvfb-run --auto-servernum bundle exec rspec
 

@@ -1,5 +1,8 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
+@import "jquery-ui.css";
+@import "bootstrap";
+
+// https://github.com/twbs/icons/releases
+@import 'bootstrap-icons-1.11.1';
 
 .home-margin {
   margin-top: calc(100vh / 2 - 132px);
@@ -36,4 +39,3 @@ p.page-link {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-

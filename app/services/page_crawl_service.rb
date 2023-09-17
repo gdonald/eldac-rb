@@ -29,7 +29,7 @@ class PageCrawlService
 
   def html(doc)
     doc.at('body').children.to_s.strip
-       .gsub(/>[\s]+</, '><')
+       .gsub(/>\s+</, '><')
        .gsub(/\n\s+/, ' ')
   end
 

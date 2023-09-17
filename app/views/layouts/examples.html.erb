@@ -8,12 +8,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="d-flex flex-column h-100">
-    <main class="flex-shrink-0">
-      <div class="container">
-        <%= yield %>
-      </div>
-    </main>
-    <%= render 'shared/footer' %>
+  <body>
+    <%= yield %>
   </body>
 </html>

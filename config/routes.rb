@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   mount Sidekiq::Web => '/sidekiq'
 
+  get '/examples', to: 'home#examples'
+
   root 'home#index'
 end
