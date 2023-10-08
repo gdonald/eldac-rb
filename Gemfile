@@ -21,5 +21,10 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bcrypt_pbkdf'
+  gem 'capistrano', '~> 3.17.3', require: false
+  gem 'capistrano-passenger'
+  gem 'capistrano-rails'
+  gem 'ed25519'
   gem 'web-console'
 end
