@@ -12,7 +12,18 @@ export default class extends Controller {
     this.selectedValue = -1
   }
 
-  search(event) {
+  debounce = (func, timeout = 300) => {
+    let id
+
+    return (...args) => {
+      clearTimeout(id)
+      id = setTimeout(() => { func.apply(this, args) }, timeout)
+    }
+  }
+
+  search = this.debounce((event) => this.doSearch(event))
+
+  doSearch(event) {
     let keyCode = event.keyCode
 
     this.updateSelected(keyCode)
@@ -36,8 +47,10 @@ export default class extends Controller {
     }
 
     let term = event.target.value
+    if (term.length < 2) { return }
 
     let that = this
+
     fetch(`/search/autocomplete?q=${term}`).then(
       function (response) {
         return response.json()
@@ -66,19 +79,18 @@ export default class extends Controller {
   }
 
   drawResults(results) {
-    let items = this.resultsToItems(results)
-    return `<ul>${items}</ul>`
+    return `<ul>${this.resultsToItems(results)}</ul>`
   }
   
   resultsToItems(results) {
     let that = this
-    let items = results.map(function (item, index) {
+
+    return results.map(function (item, index) {
       let selected = index === that.selectedValue ? ' selected' : ''
       let highlightedItem = that.highlightItem(item);
 
       return `<li class="result${selected}" data-value="${item}">${highlightedItem}</li>`
-    })
-    return items.join('')
+    }).join('')
   }
 
   highlightItem(item) {
