@@ -1,24 +1,55 @@
-# README
+# Eldac
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![GitHub](https://img.shields.io/github/license/gdonald/eldac?color=0000ee)](https://github.com/gdonald/eldac/blob/main/LICENSE)
+[![Ruby on Rails CI](https://github.com/gdonald/eldac/actions/workflows/eldac.yml/badge.svg)](https://github.com/gdonald/eldac/actions/workflows/eldac.yml)
+[![codecov](https://codecov.io/gh/gdonald/eldac-rb/graph/badge.svg?token=15G17UJEJA)](https://codecov.io/gh/gdonald/eldac-rb)
 
-Things you may want to cover:
+### What is it?
 
-* Ruby version
+Eldac is a web application for collecting electronic data and making it available for searching and display.  "Eldac" is an acronym for "electronic data capture".
 
-* System dependencies
+### Features:
 
-* Configuration
+- [x] Add web crawler
+- [x] Add basic search
+- [x] Add hostname allow/ignore lists
+- [x] Add request throttling
+- [x] Add search phrase autocomplete
+- [x] Add full-text ranked search
+- [ ] API search endpoint
+- [ ] Handle robots.txt
+- [ ] Handle sitemap.xml
+- [ ] Add "previous searches" list
+- [ ] Add user authentication
 
-* Database creation
+### Ruby version
 
-* Database initialization
+3.2.2
 
-* How to run the test suite
+### System dependencies
 
-* Services (job queues, cache servers, search engines, etc.)
+TODO: List required system dependencies.
 
-* Deployment instructions
+### Configuration
 
-* ...
+TODO: List configuration instructions.
+
+### Database creation
+
+TODO: List database creation instructions.
+
+### Database initialization
+
+TODO: List database initialization instructions.
+
+### How to run the test suite
+
+TODO: Explain how to run the test suite.
+
+### Services (job queues, cache servers, search engines, etc.)
+
+TODO: List services (job queues, cache servers, search engines, etc.) that this project relies on.
+
+### Deployment instructions
+
+TODO: Explain how to deploy this project.

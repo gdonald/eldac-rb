@@ -1,0 +1,59 @@
+<div class="container mx-auto mt-4 pb-2 border-bottom" data-controller="autocomplete">
+  <div class="row">
+    <div class="col-sm-6">
+      <h1>
+        <%= link_to site_name, root_path, class: 'text-decoration-none link-dark' %>
+      </h1>
+    </div>
+    <div class="col-sm-6 autocomplete-wrapper">
+      <%= form_with method: 'get',
+            url: search_path,
+            id: 'search',
+            html: {
+              autocomplete: 'off',
+              'data-autocomplete-target' => 'form'
+            } do |form| %>
+        <div class="input-group">
+          <%= form.text_field :q,
+                placeholder: 'Search',
+                value: params[:q],
+                class: 'form-control query pt-2',
+                required: true,
+                autofocus: true,
+                'data-autocomplete-target' => 'q',
+                'data-action' => 'keyup->autocomplete#search',
+                'onkeydown' => 'event.keyCode == 13 && event.preventDefault()'
+          %>
+          <button class="input-group-text" id="search"><i class="bi-search"></i></button>
+        </div>
+        <div class="autocomplete-result negative-margin-show"
+             data-autocomplete-target="results"
+             style="display:none"
+        ></div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto mt-3 pb-5">
+  <% if @pages&.any? %>
+    <p>Search results for "<%= params[:q] %>":</p>
+
+    <% @pages.each do |page| %>
+      <article class="mt-4">
+        <h2 class="fs-5"><%= link_to page.title, page.url, class: 'text-decoration-none link-dark', target: '_blank' %></h2>
+        <p class="fs-6 pt-0 pb-0 page-link"><%= link_to page.url, page.url, class: 'text-decoration-none link-dark link-opacity-50', target: '_blank' %></p>
+        <p class="fs-6 pt-0"><%= page.blurb %></p>
+      </article>
+    <% end %>
+
+    <div class="mt-4">
+      <%= paginate @pages,
+                  theme: 'bootstrap-5',
+                  pagination_class: "pagination-sm flex-wrap justify-content-center",
+                  nav_class: "d-inline-block" %>
+    </div>
+  <% else %>
+    <p>No results found for "<%= params[:q] %>"</p>
+  <% end %>
+</div>

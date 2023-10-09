@@ -1,2 +1,117 @@
-@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap/dist/css/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+.home-margin {
+  margin-top: calc(100vh / 2 - 132px);
+}
+
+a {
+  color: #505050;
+}
+
+a:hover {
+  color: #000;
+}
+
+a.page-link {
+  color: #505050;
+}
+
+a.page-link:hover {
+  color: #000;
+}
+
+.active > .page-link {
+  background-color: #666;
+  border-color: #666;
+}
+
+p.page-link {
+  line-height: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.autocomplete-wrapper {
+  position: relative;
+  padding: 0 0 1.125em 0;
+
+  .home {
+    display: inline-block;
+  }
+}
+
+.autocomplete-result {
+  background-color: #808080;
+  padding: 3px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 1000;
+  position: absolute;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  left: 0;
+  right: 0;
+}
+
+.negative-margin-home {
+  margin: -20px 0 0 0;
+}
+
+.negative-margin-show {
+  margin: -4px 0 0 0;
+}
+
+.query {
+  border-radius: 0;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border-color: #808080;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  background-color: #808080;
+}
+
+.query:focus {
+  border-color: #808080;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  background-color: #808080;
+}
+
+.autocomplete-result ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.autocomplete-result ul li {
+  color: #fff;
+  padding: 5px 8px;
+}
+
+.autocomplete-result ul li:hover {
+  background: #666;
+  cursor: pointer;
+}
+
+.autocomplete-result ul li.selected {
+  background: #aaa;
+}
+
+::placeholder {
+  color: #ccc !important;
+  opacity: 1 !important; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Edge 12 -18 */
+  color: red !important;
+}

@@ -1,0 +1,13 @@
+require:
+  - rubocop-rake
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-capybara
+  - rubocop-factory_bot
+
+AllCops:
+  NewCops: enable
+Style/Documentation:
+  Enabled: false
+# RSpec/ExampleLength:
+#   Max: 7
