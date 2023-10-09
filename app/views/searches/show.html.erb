@@ -1,8 +1,8 @@
-<div class="container mx-auto mt-4 pb-2 border-bottom" data-controller="autocomplete">
+<div class="container mx-auto mt-4 pb-2 px-4 border-bottom" data-controller="autocomplete">
   <div class="row">
     <div class="col-sm-6">
       <h1>
-        <%= link_to site_name, root_path, class: 'text-decoration-none link-dark' %>
+        <%= link_to site_name, root_path, class: 'text-decoration-none' %>
       </h1>
     </div>
     <div class="col-sm-6 autocomplete-wrapper">
@@ -41,8 +41,8 @@
 
     <% @pages.each do |page| %>
       <article class="mt-4">
-        <h2 class="fs-5"><%= link_to page.title, page.url, class: 'text-decoration-none link-dark', target: '_blank' %></h2>
-        <p class="fs-6 pt-0 pb-0 page-link"><%= link_to page.url, page.url, class: 'text-decoration-none link-dark link-opacity-50', target: '_blank' %></p>
+        <h2 class="fs-5"><%= link_to page.title, page.url, class: 'text-decoration-none', target: '_blank' %></h2>
+        <p class="fs-6 pt-0 pb-0 page-link"><%= link_to page.url, page.url, class: 'text-decoration-none link-opacity-50', target: '_blank' %></p>
         <p class="fs-6 pt-0"><%= page.blurb %></p>
       </article>
     <% end %>

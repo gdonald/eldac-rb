@@ -74,9 +74,19 @@ export default class extends Controller {
     let that = this
     let items = results.map(function (item, index) {
       let selected = index === that.selectedValue ? ' selected' : ''
-      return `<li class="result${selected}">${item}</li>`
+      let highlightedItem = that.highlightItem(item);
+
+      return `<li class="result${selected}" data-value="${item}">${highlightedItem}</li>`
     })
     return items.join('')
+  }
+
+  highlightItem(item) {
+    let term = this.qTarget.value
+    let remainder = item.replace(new RegExp(term, 'i'), '')
+    let value = `${term}<strong data-value="${item}">${remainder}</strong>`
+
+    return value
   }
   
   rebindResults() {
@@ -85,7 +95,7 @@ export default class extends Controller {
     let that = this
     Array.from(elements).forEach(function (element) {
       element.addEventListener('click', function (event) {
-        that.qTarget.value = event.target.innerText
+        that.qTarget.value = event.target.dataset.value
         that.resultsTarget.innerHTML = ''
         that.formTarget.submit()
       })

@@ -21,6 +21,16 @@ a.page-link:hover {
   color: #000;
 }
 
+h1, h2 {
+  a {
+    color: #00c;
+  }
+
+  a:hover {
+    color: #00e;
+  }
+}
+
 .active > .page-link {
   background-color: #666;
   border-color: #666;
@@ -48,7 +58,6 @@ p.page-link {
 
 .autocomplete-result {
   background-color: #808080;
-  padding: 3px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   z-index: 1000;
@@ -75,16 +84,16 @@ p.page-link {
   border-color: #808080;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #fff;
-  background-color: #808080;
+  color: #000;
+  background-color: #bbb;
 }
 
 .query:focus {
   border-color: #808080;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #fff;
-  background-color: #808080;
+  color: #000;
+  background-color: #bbb;
 }
 
 .autocomplete-result ul {
@@ -94,24 +103,35 @@ p.page-link {
 }
 
 .autocomplete-result ul li {
-  color: #fff;
+  background: #bbb;
+  color: #101010;
   padding: 5px 8px;
+
+  strong {
+    color: #009;
+  }
 }
 
 .autocomplete-result ul li:hover {
-  background: #666;
+  background: #aaa;
   cursor: pointer;
+
+  strong {
+    color: #00c;
+  }
 }
 
 .autocomplete-result ul li.selected {
-  background: #aaa;
+  background: #ccc;
+  font-weight: bold;
+  color: #000;
 }
 
 ::placeholder {
-  color: #ccc !important;
+  color: #808080 !important;
   opacity: 1 !important; /* Firefox */
 }
 
 ::-ms-input-placeholder { /* Edge 12 -18 */
-  color: red !important;
+  color: #808080 !important;
 }
