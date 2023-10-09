@@ -1,4 +1,4 @@
-# # frozen_string_literal: true
+# frozen_string_literal: true
 
 # # :nocov:
 # ActiveAdmin.register Html do
