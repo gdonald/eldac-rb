@@ -49,12 +49,12 @@ jobs:
         run: npm install -g yarn
 
       - name: Install package.json dependencies
-        run: yarn install # --frozen-lockfile
+        run: yarn install --verbose  # --frozen-lockfile
 
-      # - name: Run yarn install
-      #   uses: borales/actions-yarn@v4
-      #   with:
-      #     cmd: install
+      - name: Show files in current directory
+        run: |
+          ls -lavh
+          ls -lavh node_modules
 
       - name: Run tests
         run: xvfb-run --auto-servernum bundle exec rspec      
