@@ -1,6 +1,6 @@
 # Eldac
 
-[![GitHub](https://img.shields.io/github/license/gdonald/eldac?color=0000ee)](https://github.com/gdonald/eldac/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/license/gdonald/eldac?color=0000dd)](https://github.com/gdonald/eldac/blob/main/LICENSE)
 [![Ruby on Rails CI](https://github.com/gdonald/eldac/actions/workflows/eldac.yml/badge.svg)](https://github.com/gdonald/eldac/actions/workflows/eldac.yml)
 [![codecov](https://codecov.io/gh/gdonald/eldac-rb/graph/badge.svg?token=15G17UJEJA)](https://codecov.io/gh/gdonald/eldac-rb)
 
