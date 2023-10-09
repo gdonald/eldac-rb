@@ -51,10 +51,8 @@ jobs:
       - name: Install package.json dependencies
         run: yarn install --verbose  # --frozen-lockfile
 
-      - name: Show files in current directory
-        run: |
-          ls -lavh
-          ls -lavh node_modules
+      - name: Build CSS
+        run: yarn run build:css
 
       - name: Run tests
         run: xvfb-run --auto-servernum bundle exec rspec      
