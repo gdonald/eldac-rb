@@ -42,7 +42,5 @@ module Eldac
     config.generators.system_tests = nil
 
     config.active_record.schema_format = :sql
-
-    config.web_console.whitelisted_ips = '10.0.0.0/8'
   end
 end
