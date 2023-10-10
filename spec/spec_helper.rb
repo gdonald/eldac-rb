@@ -4,6 +4,9 @@ require 'simplecov'
 SimpleCov.start 'rails' do
   enable_coverage :branch
   primary_coverage :branch
+  SimpleCov.groups.delete('Channels')
+  SimpleCov.groups.delete('Libraries')
+  SimpleCov.add_group 'Services', 'app/services'
 end
 
 require 'aasm/rspec'

@@ -15,9 +15,7 @@ class PageCrawlService
     return unless html?(response)
 
     doc = Nokogiri::HTML(response.body)
-
-    page.title = doc.title
-    page.save!
+    page.update!(title: doc.title)
 
     Html.create!(page:, content: html(doc))
   end

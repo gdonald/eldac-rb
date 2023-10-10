@@ -11,7 +11,7 @@ class PageCrawl < ApplicationRecord
       transitions from: :created, to: :running
     end
 
-    event :complete do
+    event :complete, after_commit: :update_last_crawled do
       transitions from: :running, to: :completed
     end
 
@@ -44,5 +44,11 @@ class PageCrawl < ApplicationRecord
 
   def self.host_wait
     ENV.fetch('HOST_THROTTLE_SECONDS', 900).to_i.seconds.ago
+  end
+
+  private
+
+  def update_last_crawled
+    host.update(last_crawled_at: Time.zone.now)
   end
 end

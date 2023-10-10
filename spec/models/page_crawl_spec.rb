@@ -54,4 +54,15 @@ RSpec.describe PageCrawl do
       expect(described_class.host_wait).to be_a(Time)
     end
   end
+
+  describe '#update_last_crawled' do
+    let(:page_crawl) { create(:page_crawl, :running) }
+    let(:host) { page_crawl.host }
+
+    it 'updates the last_crawled_at attribute' do
+      expect do
+        page_crawl.complete!
+      end.to(change(host, :last_crawled_at))
+    end
+  end
 end
