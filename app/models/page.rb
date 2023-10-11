@@ -14,16 +14,23 @@ class Page < ApplicationRecord
       .includes(query: { path: { host: :scheme } })
   }
 
+  # pg_search_scope :by_term,
+  #                 against: {
+  #                   content: 'A',
+  #                   title: 'B',
+  #                   blurb: 'C'
+  #                 },
+  #                 using: {
+  #                   trigram: {},
+  #                   dmetaphone: {},
+  #                   tsearch: { prefix: true }
+  #                 }
+
   pg_search_scope :by_term,
                   against: {
                     content: 'A',
                     title: 'B',
                     blurb: 'C'
-                  },
-                  using: {
-                    trigram: {},
-                    dmetaphone: {},
-                    tsearch: { prefix: true }
                   }
 
   def url
