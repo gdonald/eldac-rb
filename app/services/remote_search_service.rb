@@ -17,7 +17,7 @@ module RemoteSearchService
 
     pages = []
     json['pages'].each do |page|
-      pages << RemotePage.new(title: page['title'], blurb: page['blurb'], content: page['content'])
+      pages << RemotePage.new(title: page['title'], blurb: page['blurb'], content: page['content'], url: page['url'])
     end
 
     pages

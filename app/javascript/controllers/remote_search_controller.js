@@ -12,10 +12,9 @@ export default class extends Controller {
 
     fetch(`/remote_search/?q=${this.termValue}`).then(
       function (response) {
-        // console.log('response', response.text());
         return response.text()
-      }).then(function (results) {
-        that.resultsTarget.innerHTML = results
+      }).then(function (html) {
+        that.resultsTarget.parentElement.innerHTML = html
         return true
       }).catch(function (error) {
         console.warn('An error occured:', error)
