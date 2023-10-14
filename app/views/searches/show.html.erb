@@ -48,12 +48,12 @@
     <% end %>
 
     <div class="mt-4">
-      <%= paginate @pages,
-                  theme: 'bootstrap-5',
-                  pagination_class: "pagination-sm flex-wrap justify-content-center",
-                  nav_class: "d-inline-block" %>
+      <% if params[:page] %>
+        <%= link_to_prev_page @pages, 'Previous Page' %> &nbsp;
+      <% end %>
+      <%= link_to_next_page @pages, 'Next Page' %>
     </div>
   <% else %>
-    <p>No results found for "<%= params[:q] %>"</p>
+    <p>No search results found for "<%= params[:q] %>"</p>
   <% end %>
 </div>

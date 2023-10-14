@@ -11,9 +11,9 @@ class PageService
   def search
     return Page.none if q.blank?
 
-    pages = Page.search_by_term(q).page(page).per(10)
+    pages = Page.search_by_term(q).page(page).per(10).without_count
 
-    pages = ServerSearchService.search(q) if pages.total_pages.zero?
+    pages = ServerSearchService.search(q) if pages.empty?
 
     pages
   end
