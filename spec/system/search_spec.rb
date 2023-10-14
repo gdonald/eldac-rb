@@ -28,7 +28,7 @@ RSpec.describe 'Search' do
           click_button(id: 'search')
         end
 
-        expect(page).to have_css('p', text: 'No search results found for "test"')
+        expect(page).to have_css('p', text: 'No remote search results found for "test"')
       end
     end
 

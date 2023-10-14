@@ -9,5 +9,5 @@ AllCops:
   NewCops: enable
 Style/Documentation:
   Enabled: false
-# RSpec/ExampleLength:
-#   Max: 7
+RSpec/NestedGroups:
+  Max: 4

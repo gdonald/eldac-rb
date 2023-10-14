@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resource :search, only: %i[show]
   end
 
+  resources :remote_search, only: %i[index]
+
   resource :search, only: %i[show] do
     get :autocomplete, on: :collection
   end

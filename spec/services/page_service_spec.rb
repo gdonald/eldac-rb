@@ -23,14 +23,4 @@ RSpec.describe PageService do
       expect(result).to eq([page])
     end
   end
-
-  context 'when params are present and no local results' do
-    let(:params) { { q: 'test' } }
-
-    it 'calls ServerSearchService' do
-      allow(ServerSearchService).to receive(:search)
-      result
-      expect(ServerSearchService).to have_received(:search).with('test')
-    end
-  end
 end

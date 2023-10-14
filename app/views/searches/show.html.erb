@@ -54,6 +54,8 @@
       <%= link_to_next_page @pages, 'Next Page' %>
     </div>
   <% else %>
-    <p>No search results found for "<%= params[:q] %>"</p>
+    <p data-controller="remote-search"
+       data-remote-search-term-value="<%= params[:q] %>"
+       data-remote-search-target="results">No local search results found for "<%= params[:q] %>".  Searching the network...</p>
   <% end %>
 </div>
