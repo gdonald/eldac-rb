@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :nocov:
-ActiveAdmin.register Url do
+ActiveAdmin.register Url do # rubocop:disable Metrics/BlockLength
   menu parent: 'Pages', priority: 0
 
   preserve_default_filters!

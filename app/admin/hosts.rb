@@ -15,7 +15,7 @@ ActiveAdmin.register Host do
     column('Paths') do |host|
       host.paths.limit(10).collect do |path|
         link_to(path.value, "/admin/paths/#{path.id}") if path.value.present?
-      end.compact.join(', ').html_safe
+      end.compact.join(', ').html_safe # rubocop:disable Rails/OutputSafety
     end
     column :last_crawled_at
     column :created_at

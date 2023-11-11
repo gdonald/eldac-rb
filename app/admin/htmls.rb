@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :nocov:
-ActiveAdmin.register Html do
+ActiveAdmin.register Html do # rubocop:disable Metrics/BlockLength
   menu parent: 'Content', priority: 4
 
   preserve_default_filters!
