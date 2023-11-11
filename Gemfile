@@ -21,13 +21,13 @@ gem 'nokogiri', '~> 1.15.4'
 gem 'pg', '~> 1.1'
 gem 'pg_search', '~> 2.3.6'
 gem 'puma', '>= 5.0'
-gem 'rack', '~> 2.2.8'
+gem 'rack', '~> 3.0.8'
 gem 'rails', '~> 7.1.0'
 gem 'rbnacl', '~> 7.1.1'
 gem 'redis', '~> 5.0.7'
 gem 'sassc-rails', '~> 2.1.2'
-gem 'sidekiq', '~> 7.1.4'
-gem 'sidekiq-cron', '~> 1.10.1'
+gem 'sidekiq', '~> 7.2.0'
+gem 'sidekiq-cron', '~> 1.11.0'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
@@ -47,7 +47,7 @@ end
 
 group :development do
   gem 'bcrypt_pbkdf'
-  gem 'capistrano', '~> 3.17.3', require: false
+  gem 'capistrano', '~> 3.18.0', require: false
   gem 'capistrano-passenger'
   gem 'capistrano-rails'
   gem 'ed25519'

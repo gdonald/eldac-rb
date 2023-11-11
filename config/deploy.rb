@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-lock '~> 3.17.3'
+lock '~> 3.18.0'
 
 set :application, 'eldac'
 set :repo_url, 'git@github.com:gdonald/eldac-rb.git'
