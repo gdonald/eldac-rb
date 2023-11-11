@@ -135,3 +135,13 @@ p.page-link {
 ::-ms-input-placeholder { /* Edge 12 -18 */
   color: #808080 !important;
 }
+
+::-moz-selection { /* Firefox */
+  color: #fff;
+  background: #00c;
+}
+
+::selection {
+  color: #fff;
+  background: #00c;
+}
