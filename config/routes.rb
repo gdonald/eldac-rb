@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get :autocomplete, on: :collection
   end
 
-  # ActiveAdmin.routes(self)
+  ActiveAdmin.routes(self)
   mount Sidekiq::Web => '/sidekiq'
 
   root 'home#index'
