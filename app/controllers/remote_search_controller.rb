@@ -2,7 +2,7 @@
 
 class RemoteSearchController < ApplicationController
   def index
-    @pages = RemoteSearchService.search(params[:q])
+    @pages = RemoteSearchService.new(params[:q]).search
     render layout: nil
   end
 end

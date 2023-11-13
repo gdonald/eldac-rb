@@ -15,4 +15,8 @@ class Client < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     %w[client_addresses]
   end
+
+  def pub_key
+    OpenSSL::PKey.read(public_key.gsub('\\n', "\n"))
+  end
 end

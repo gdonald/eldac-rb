@@ -1,9 +1,6 @@
 <% if @pages&.any? %>
   <p>Remote search results for "<%= params[:q] %>":</p>
-
-  <% @pages.each do |page| %>
-    <%= render partial: 'shared/page', locals: { page: page } %>
-  <% end %>
+  <%= render @pages %>
 <% else %>
   <p>No remote search results found for "<%= params[:q] %>".</p>
 <% end %>

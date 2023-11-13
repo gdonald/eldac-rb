@@ -38,10 +38,7 @@
 <div class="container mx-auto mt-3 pb-5">
   <% if @pages&.any? %>
     <p>Search results for "<%= params[:q] %>":</p>
-
-    <% @pages.each do |page| %>
-      <%= render partial: 'shared/page', locals: { page: page } %>
-    <% end %>
+    <%= render @pages %>
 
     <div class="mt-4">
       <% if params[:page] %>

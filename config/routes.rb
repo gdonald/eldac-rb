@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   namespace :api do
-    resource :search, only: %i[show]
+    post :search, to: 'searches#show'
   end
 
   resources :remote_search, only: %i[index]
