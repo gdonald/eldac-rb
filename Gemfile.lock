@@ -98,7 +98,7 @@ GEM
       ruby2_keywords (>= 0.0.2)
     ast (2.4.2)
     base64 (0.2.0)
-    bcrypt (3.1.19)
+    bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.0)
     bigdecimal (3.1.4)
     bindex (0.8.1)
@@ -214,7 +214,7 @@ GEM
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
     language_server-protocol (3.17.0.3)
-    loofah (2.21.4)
+    loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -227,10 +227,11 @@ GEM
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.5)
     minitest (5.20.0)
     multi_xml (0.6.0)
     mutex_m (0.2.0)
-    net-imap (0.4.4)
+    net-imap (0.4.5)
       date
       net-protocol
     net-pop (0.1.2)
@@ -242,12 +243,15 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     net-ssh (7.2.0)
-    nio4r (2.5.9)
-    nokogiri (1.15.4-aarch64-linux)
+    nio4r (2.6.0)
+    nokogiri (1.15.5)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.15.4-arm64-darwin)
+    nokogiri (1.15.5-aarch64-linux)
       racc (~> 1.4)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.15.5-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     parallel (1.23.0)
     parser (3.2.2.4)
@@ -262,7 +266,7 @@ GEM
       method_source (~> 1.0)
     psych (5.1.1.1)
       stringio
-    public_suffix (5.0.3)
+    public_suffix (5.0.4)
     puma (6.4.0)
       nio4r (~> 2.0)
     raabro (1.4.0)
@@ -447,6 +451,7 @@ GEM
 PLATFORMS
   aarch64-linux
   arm64-darwin-22
+  x86_64-freebsd-14
   x86_64-linux
 
 DEPENDENCIES
