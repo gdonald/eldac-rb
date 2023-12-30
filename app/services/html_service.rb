@@ -25,7 +25,7 @@ class HtmlService
       elem ||= doc.search(tag).first
     end
 
-    elem.to_s.gsub(/<.*?>/, '').strip
+    Sanitize.fragment(elem.to_s).strip
   end
 
   def content
@@ -50,7 +50,7 @@ class HtmlService
   end
 
   def remove_html_tags(text)
-    text.gsub(/<.*?>/, '').gsub("\n", ' ').gsub("\r", '').gsub(/\s+/, ' ').strip
+    Sanitize.fragment(text).gsub("\n", ' ').gsub("\r", '').gsub(/\s+/, ' ').strip
   end
 
   def find_hrefs
