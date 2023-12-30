@@ -2,10 +2,10 @@
 
 source 'https://rubygems.org'
 
-ruby '3.2.2'
+ruby '3.3.0'
 
 gem 'aasm', '~> 5.5.0'
-gem 'activeadmin', '~> 3.1.0'
+gem 'activeadmin', '~> 3.2.0'
 gem 'after_commit_everywhere', '~> 1.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
@@ -17,7 +17,7 @@ gem 'jbuilder'
 gem 'jsbundling-rails'
 gem 'jwt', '~> 2.7.1'
 gem 'kaminari', '~> 1.2.2'
-gem 'nokogiri', '~> 1.15.4'
+gem 'nokogiri', '~> 1.16.0'
 gem 'pg', '~> 1.1'
 gem 'pg_search', '~> 2.3.6'
 gem 'puma', '>= 5.0'
@@ -57,7 +57,7 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '~> 5.3.0'
+  gem 'shoulda-matchers', '~> 6.0.0'
   gem 'simplecov', require: false
   gem 'webmock'
 end

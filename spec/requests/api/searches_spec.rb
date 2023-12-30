@@ -43,9 +43,7 @@ RSpec.describe 'Api::Searches' do
 
         allow(pkey).to receive(:sign)
 
-        allow(JWT).to receive(:encode).and_return(data)
-
-        allow(JWT).to receive(:decode).and_return([{ 'q' => 'foo' }, { 'alg' => algorithm }])
+        allow(JWT).to receive_messages(encode: data, decode: [{ 'q' => 'foo' }, { 'alg' => algorithm }])
       end
 
       it 'returns http success' do

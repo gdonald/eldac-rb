@@ -20,23 +20,23 @@ class RemoteSearchService
 
   def request
     RequestEncoderService.new(term).encode
-    # rescue StandardError
-    #   Rails.logger.error('Failed to encode request')
-    #   nil
+  rescue StandardError
+    Rails.logger.error('Failed to encode request')
+    nil
   end
 
   def response
     r = request
     HTTParty.post(url, body: r[:body], headers: r[:headers])
-    # rescue StandardError
-    #   Rails.logger.error('Remote request failed')
-    #   nil
+  rescue StandardError
+    Rails.logger.error('Remote request failed')
+    nil
   end
 
   def json
     JSON.parse(response.body)
-    # rescue StandardError
-    #   Rails.logger.error('Failed to parse response body')
-    #   nil
+  rescue StandardError
+    Rails.logger.error('Failed to parse response body')
+    nil
   end
 end

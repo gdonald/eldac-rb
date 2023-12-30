@@ -33,9 +33,12 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   config.before(:each, type: :system) do
-    driver = :selenium_chrome_headless
-    driver = :selenium_chrome if ENV['SHOW_CHROME']
-    driven_by(driver)
+    # driver = :selenium_chrome_headless
+    # driver = :selenium_chrome if ENV['SHOW_CHROME']
+    using = :headless_firefox
+    using = :firefox if ENV['SHOW_FF']
+    using = :chrome if ENV['SHOW_CHROME']
+    driven_by(:selenium, using:)
   end
 
   config.include FactoryBot::Syntax::Methods
