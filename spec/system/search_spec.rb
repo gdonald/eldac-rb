@@ -12,7 +12,7 @@ RSpec.describe 'Search' do
 
         within 'form' do
           fill_in('q', with: 'test')
-          click_button(id: 'search')
+          click_on(id: 'search')
         end
 
         expect(page).to have_css('p', text: 'Search results for "test":')
@@ -25,7 +25,7 @@ RSpec.describe 'Search' do
 
         within 'form' do
           fill_in('q', with: 'test')
-          click_button(id: 'search')
+          click_on(id: 'search')
         end
 
         expect(page).to have_css('p', text: 'No remote search results found for "test"')
@@ -37,7 +37,7 @@ RSpec.describe 'Search' do
         visit root_path
 
         within 'form' do
-          click_button(id: 'search')
+          click_on(id: 'search')
         end
 
         expect(page).to have_css('h1', text: 'ELDAC')
