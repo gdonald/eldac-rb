@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 ruby '3.3.0'
 
 gem 'aasm', '~> 5.5.0'
-gem 'activeadmin', '~> 3.2.0'
+gem 'activeadmin', '~> 3.2.2'
 gem 'after_commit_everywhere', '~> 1.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
